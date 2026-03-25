@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Package Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:       #0d0f12;
+    --surface:  #141720;
+    --surface2: #1c2030;
+    --border:   #252a3a;
+    --text:     #e2e4ee;
+    --muted:    #6b7293;
+    --accent:   #4f8cff;
+    --mono:     'Space Mono', monospace;
+    --sans:     'DM Sans', sans-serif;
+
+    --status-ordered:          #5a6690;
+    --status-shipped:          #4f8cff;
+    --status-in_transit:       #a78bfa;
+    --status-out_for_delivery: #f59e0b;
+    --status-delivered:        #34d399;
+    --status-delayed:          #f97316;
+    --status-exception:        #f43f5e;
+    --status-unknown:          #4b5563;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.5;
+    min-height: 100vh;
+    padding: 0 0 60px;
+  }
+
+  /* ── Header ── */
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px 40px 20px;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 10;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo-mark {
+    width: 32px; height: 32px;
+    border: 2px solid var(--accent);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: -1px;
+  }
+
+  .logo-text {
+    font-family: var(--mono);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--text);
+  }
+
+  .header-meta {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    text-align: right;
+  }
+
+  #last-updated { color: var(--accent); }
+
+  /* ── Stats bar ── */
+  .stats-bar {
+    display: flex;
+    gap: 1px;
+    background: var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .stat {
+    flex: 1;
+    padding: 16px 24px;
+    background: var(--surface);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .stat:hover, .stat.active {
+    background: var(--surface2);
+  }
+
+  .stat.active .stat-label { color: var(--accent); }
+
+  .stat-num {
+    font-family: var(--mono);
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  /* ── Filters ── */
+  .filters {
+    padding: 16px 40px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .search-wrap {
+    position: relative;
+    flex: 1;
+    max-width: 320px;
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 12px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  #search {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 12px 8px 32px;
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  #search:focus { border-color: var(--accent); }
+  #search::placeholder { color: var(--muted); }
+
+  .filter-pill {
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    font-family: var(--sans);
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+
+  .filter-pill:hover { border-color: var(--accent); color: var(--accent); }
+  .filter-pill.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  /* ── Package grid ── */
+  .grid {
+    padding: 24px 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 16px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: border-color 0.15s, transform 0.15s;
+    animation: fadeUp 0.3s ease both;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--status-color, var(--border));
+    transition: background 0.3s;
+  }
+
+  .card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .card-retailer {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+  }
+
+  .card-desc {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+    margin-top: 3px;
+    line-height: 1.3;
+  }
+
+  .status-badge {
+    flex-shrink: 0;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background: color-mix(in srgb, var(--status-color) 15%, transparent);
+    color: var(--status-color);
+    border: 1px solid color-mix(in srgb, var(--status-color) 30%, transparent);
+  }
+
+  .card-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .meta-item { display: flex; flex-direction: column; gap: 2px; }
+  .meta-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+  .meta-value { font-family: var(--mono); font-size: 12px; color: var(--text); }
+  .meta-value.highlight { color: var(--accent); }
+
+  .card-status-detail {
+    font-size: 12px;
+    color: var(--muted);
+    padding: 10px 12px;
+    background: var(--surface2);
+    border-radius: 6px;
+    border-left: 2px solid var(--status-color, var(--border));
+  }
+
+  .card-actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .btn-track {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: transparent;
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.15s;
+    display: block;
+  }
+
+  .btn-track:hover {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+
+  .btn-dismiss {
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: transparent;
+    color: var(--muted);
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .btn-dismiss:hover { border-color: #f43f5e; color: #f43f5e; }
+
+  /* ── Progress bar (in-transit) ── */
+  .progress-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .progress-steps {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  .progress-step {
+    flex: 1;
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    position: relative;
+    transition: background 0.3s;
+  }
+
+  .progress-step.done { background: var(--status-color, var(--accent)); }
+  .progress-step + .progress-step { margin-left: 3px; }
+
+  .progress-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 9px;
+    color: var(--muted);
+    font-family: var(--mono);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── Empty state ── */
+  .empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 80px 40px;
+    color: var(--muted);
+  }
+
+  .empty-icon {
+    font-size: 48px;
+    display: block;
+    margin-bottom: 16px;
+    filter: grayscale(1) opacity(0.4);
+  }
+
+  .empty h3 { font-size: 18px; color: var(--text); margin-bottom: 8px; }
+
+  /* ── Refresh btn ── */
+  .btn-refresh {
+    padding: 8px 18px;
+    border: 1px solid var(--accent);
+    border-radius: 6px;
+    background: transparent;
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .btn-refresh:hover { background: var(--accent); color: #fff; }
+  .btn-refresh.spinning { animation: spin 1s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  @media (max-width: 640px) {
+    header, .filters, .grid { padding-left: 16px; padding-right: 16px; }
+    .grid { grid-template-columns: 1fr; }
+    .stats-bar { overflow-x: auto; }
+    .stat { min-width: 110px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-mark">PT</div>
+    <span class="logo-text">PACKAGE TRACKER</span>
+  </div>
+  <div class="header-meta">
+    <div>Updated <span id="last-updated">—</span></div>
+    <div id="pkg-count">— packages tracked</div>
+  </div>
+</header>
+
+<div class="stats-bar">
+  <div class="stat active" data-filter="all" onclick="setFilter('all', this)">
+    <span class="stat-num" id="count-all">0</span>
+    <span class="stat-label">All</span>
+  </div>
+  <div class="stat" data-filter="active" onclick="setFilter('active', this)">
+    <span class="stat-num" id="count-active">0</span>
+    <span class="stat-label">Active</span>
+  </div>
+  <div class="stat" data-filter="out_for_delivery" onclick="setFilter('out_for_delivery', this)">
+    <span class="stat-num" id="count-ofd">0</span>
+    <span class="stat-label">Out for delivery</span>
+  </div>
+  <div class="stat" data-filter="delivered" onclick="setFilter('delivered', this)">
+    <span class="stat-num" id="count-delivered">0</span>
+    <span class="stat-label">Delivered</span>
+  </div>
+  <div class="stat" style="cursor:default">
+    <span class="stat-num" id="total-spent" style="color:var(--accent)">—</span>
+    <span class="stat-label">Total spent</span>
+  </div>
+  <div class="stat" style="cursor:default">
+    <span class="stat-num" id="total-incoming" style="color:var(--status-in_transit)">—</span>
+    <span class="stat-label">In transit $</span>
+  </div>
+</div>
+
+<div class="filters">
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input id="search" type="text" placeholder="Search retailer, description…" oninput="render()">
+  </div>
+  <button class="filter-pill active" id="pill-all"      onclick="setCarrier('all', this)">All carriers</button>
+  <button class="filter-pill"       id="pill-amazon"    onclick="setCarrier('Amazon', this)">Amazon</button>
+  <button class="filter-pill"       id="pill-ups"       onclick="setCarrier('UPS', this)">UPS</button>
+  <button class="filter-pill"       id="pill-fedex"     onclick="setCarrier('FedEx', this)">FedEx</button>
+  <button class="filter-pill"       id="pill-usps"      onclick="setCarrier('USPS', this)">USPS</button>
+  <button class="btn-refresh" id="refresh-btn" onclick="loadData()" title="Refresh">↻ Refresh</button>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<script>
+const STATUS_COLORS = {
+  ordered:          'var(--status-ordered)',
+  shipped:          'var(--status-shipped)',
+  in_transit:       'var(--status-in_transit)',
+  out_for_delivery: 'var(--status-out_for_delivery)',
+  delivered:        'var(--status-delivered)',
+  delayed:          'var(--status-delayed)',
+  exception:        'var(--status-exception)',
+  unknown:          'var(--status-unknown)',
+};
+
+const STATUS_STEPS = ['ordered','shipped','in_transit','out_for_delivery','delivered'];
+const STATUS_LABELS = ['Ordered','Shipped','In transit','Out for delivery','Delivered'];
+
+let allPackages = [];
+let currentFilter = 'all';
+let currentCarrier = 'all';
+let dismissed = new Set(JSON.parse(localStorage.getItem('dismissed') || '[]'));
+
+async function loadData() {
+  const btn = document.getElementById('refresh-btn');
+  btn.classList.add('spinning');
+  try {
+    const r = await fetch('packages.json?t=' + Date.now());
+    if (!r.ok) throw new Error('Not found');
+    const data = await r.json();
+    allPackages = data.packages || [];
+
+    const lu = data.last_updated
+      ? new Date(data.last_updated).toLocaleString('en-US', {month:'short', day:'numeric', hour:'numeric', minute:'2-digit'})
+      : '—';
+    document.getElementById('last-updated').textContent = lu;
+    document.getElementById('pkg-count').textContent = allPackages.length + ' packages tracked';
+
+    updateCounts();
+    render();
+  } catch(e) {
+    // Load sample data so the dashboard looks good without the JSON file
+    allPackages = getSampleData();
+    updateCounts();
+    render();
+  }
+  btn.classList.remove('spinning');
+}
+
+function getSampleData() {
+  return [
+    {
+      retailer: 'REI', description: 'Black Diamond Distance Carbon Z Poles',
+      carrier: 'UPS', tracking_number: '1Z999AA10123456784',
+      tracking_url: 'https://www.ups.com/track?tracknum=1Z999AA10123456784',
+      status: 'out_for_delivery', status_detail: 'Out for delivery — Minneapolis, MN',
+      estimated_delivery: new Date().toISOString().slice(0,10),
+      delivered_at: null, order_number: 'REI-2024-88192', received_at: new Date().toISOString(),
+      last_updated: new Date().toISOString().slice(0,10),
+      item_cost: 169.95, order_total: 180.44, currency: 'USD'
+    },
+    {
+      retailer: 'Amazon', description: 'Garmin HRM-Pro Plus Heart Rate Monitor',
+      carrier: 'Amazon Logistics', tracking_number: 'TBA123456789000',
+      tracking_url: 'https://track.amazon.com/tracking/TBA123456789000',
+      status: 'in_transit', status_detail: 'In transit — Milwaukee, WI → Minneapolis, MN',
+      estimated_delivery: new Date(Date.now()+86400000).toISOString().slice(0,10),
+      delivered_at: null, order_number: '113-4499201-8873024', received_at: new Date().toISOString(),
+      last_updated: new Date().toISOString().slice(0,10),
+      item_cost: 99.99, order_total: 107.24, currency: 'USD'
+    },
+    {
+      retailer: 'Backcountry', description: 'Patagonia Torrentshell 3L Jacket',
+      carrier: 'FedEx', tracking_number: '774899172137',
+      tracking_url: 'https://www.fedex.com/fedextrack/?trknbr=774899172137',
+      status: 'shipped', status_detail: 'Picked up — Salt Lake City, UT',
+      estimated_delivery: new Date(Date.now()+172800000).toISOString().slice(0,10),
+      delivered_at: null, order_number: 'BC-7720041', received_at: new Date().toISOString(),
+      last_updated: new Date().toISOString().slice(0,10),
+      item_cost: 149.00, order_total: 149.00, currency: 'USD'
+    },
+    {
+      retailer: 'Synology', description: 'HAT5310-12T NAS Hard Drive',
+      carrier: 'FedEx', tracking_number: '774900011235',
+      tracking_url: null,
+      status: 'delivered', status_detail: 'Delivered — Front door',
+      estimated_delivery: null,
+      delivered_at: new Date(Date.now()-86400000).toISOString(),
+      order_number: 'SYN-2024-44210', received_at: new Date().toISOString(),
+      last_updated: new Date().toISOString().slice(0,10),
+      item_cost: 329.99, order_total: 329.99, currency: 'USD'
+    },
+    {
+      retailer: 'Goal Zero', description: 'Yeti 1000X Power Station',
+      carrier: 'USPS', tracking_number: '9400111899223369376269',
+      tracking_url: 'https://tools.usps.com/go/TrackConfirmAction?tLabels=9400111899223369376269',
+      status: 'delayed', status_detail: 'Delayed — Weather conditions, Portland, OR',
+      estimated_delivery: new Date(Date.now()+259200000).toISOString().slice(0,10),
+      delivered_at: null, order_number: 'GZ-20240118-9921', received_at: new Date().toISOString(),
+      last_updated: new Date().toISOString().slice(0,10),
+      item_cost: 999.95, order_total: 1074.94, currency: 'USD'
+    },
+  ];
+}
+
+function formatMoney(n) {
+  if (n == null || isNaN(n)) return '—';
+  return '$' + n.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+}
+
+function getBestCost(p) {
+  // Prefer item_cost; fall back to order_total
+  return p.item_cost ?? p.order_total ?? null;
+}
+
+function updateCounts() {
+  const active = allPackages.filter(p => p.status !== 'delivered' && p.status !== 'unknown');
+  document.getElementById('count-all').textContent       = allPackages.length;
+  document.getElementById('count-active').textContent    = active.length;
+  document.getElementById('count-ofd').textContent       = allPackages.filter(p => p.status === 'out_for_delivery').length;
+  document.getElementById('count-delivered').textContent = allPackages.filter(p => p.status === 'delivered').length;
+
+  // Cost totals — use order_total as the most accurate full-order figure
+  const withCost = allPackages.filter(p => p.order_total != null);
+  const totalAll = withCost.reduce((s, p) => s + p.order_total, 0);
+  const totalIncoming = allPackages
+    .filter(p => p.status !== 'delivered' && p.order_total != null)
+    .reduce((s, p) => s + p.order_total, 0);
+
+  document.getElementById('total-spent').textContent   = withCost.length ? formatMoney(totalAll) : '—';
+  document.getElementById('total-incoming').textContent = totalIncoming ? formatMoney(totalIncoming) : '—';
+}
+
+function setFilter(f, el) {
+  currentFilter = f;
+  document.querySelectorAll('.stat').forEach(s => s.classList.remove('active'));
+  el.classList.add('active');
+  render();
+}
+
+function setCarrier(c, el) {
+  currentCarrier = c;
+  document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  render();
+}
+
+function dismiss(id) {
+  dismissed.add(id);
+  localStorage.setItem('dismissed', JSON.stringify([...dismissed]));
+  render();
+}
+
+function formatDate(d) {
+  if (!d) return '—';
+  try {
+    return new Date(d).toLocaleDateString('en-US', {month:'short', day:'numeric'});
+  } catch { return d; }
+}
+
+function progressSteps(status) {
+  const idx = STATUS_STEPS.indexOf(status);
+  return STATUS_STEPS.map((_, i) => i <= idx ? 'done' : '');
+}
+
+function render() {
+  const query = document.getElementById('search').value.toLowerCase();
+
+  let pkgs = allPackages.filter(p => {
+    if (dismissed.has(p.tracking_number || p.order_number)) return false;
+    if (currentFilter === 'active' && (p.status === 'delivered' || p.status === 'unknown')) return false;
+    if (currentFilter === 'delivered' && p.status !== 'delivered') return false;
+    if (currentFilter === 'out_for_delivery' && p.status !== 'out_for_delivery') return false;
+    if (currentCarrier !== 'all' && !p.carrier?.toLowerCase().includes(currentCarrier.toLowerCase())) return false;
+    if (query) {
+      const hay = `${p.retailer} ${p.description} ${p.carrier} ${p.tracking_number}`.toLowerCase();
+      if (!hay.includes(query)) return false;
+    }
+    return true;
+  });
+
+  const grid = document.getElementById('grid');
+
+  if (pkgs.length === 0) {
+    grid.innerHTML = `<div class="empty">
+      <span class="empty-icon">📦</span>
+      <h3>No packages found</h3>
+      <p style="color:var(--muted);font-size:13px">Try adjusting your filters or run fetch_packages.py to sync your emails.</p>
+    </div>`;
+    return;
+  }
+
+  grid.innerHTML = pkgs.map((p, i) => {
+    const color = STATUS_COLORS[p.status] || STATUS_COLORS.unknown;
+    const steps = progressSteps(p.status);
+    const showProgress = ['shipped','in_transit','out_for_delivery','delivered'].includes(p.status);
+    const eta = p.status === 'delivered'
+      ? `<div class="meta-item"><div class="meta-label">Delivered</div><div class="meta-value highlight">${formatDate(p.delivered_at)}</div></div>`
+      : `<div class="meta-item"><div class="meta-label">Est. delivery</div><div class="meta-value highlight">${formatDate(p.estimated_delivery)}</div></div>`;
+    const dismissId = p.tracking_number || p.order_number;
+
+    return `<div class="card" style="--status-color:${color};animation-delay:${i*0.04}s">
+      <div class="card-top">
+        <div>
+          <div class="card-retailer">${p.retailer || 'Unknown retailer'}</div>
+          <div class="card-desc">${p.description || 'Package'}</div>
+        </div>
+        <span class="status-badge" style="--status-color:${color}">${p.status.replace(/_/g,' ')}</span>
+      </div>
+
+      ${p.status_detail ? `<div class="card-status-detail">${p.status_detail}</div>` : ''}
+
+      ${showProgress ? `
+      <div class="progress-wrap">
+        <div class="progress-steps">
+          ${steps.map(s => `<div class="progress-step ${s}"></div>`).join('')}
+        </div>
+        <div class="progress-labels">
+          ${STATUS_LABELS.slice(0, STATUS_STEPS.length).map((l,i) => `<span>${l}</span>`).join('')}
+        </div>
+      </div>` : ''}
+
+      <div class="card-meta">
+        <div class="meta-item">
+          <div class="meta-label">Carrier</div>
+          <div class="meta-value">${p.carrier || '—'}</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Tracking #</div>
+          <div class="meta-value">${p.tracking_number ? p.tracking_number.slice(-8).padStart(p.tracking_number.length, '•') : '—'}</div>
+        </div>
+        ${eta}
+        <div class="meta-item">
+          <div class="meta-label">Order #</div>
+          <div class="meta-value">${p.order_number || '—'}</div>
+        </div>
+        ${p.item_cost != null ? `
+        <div class="meta-item">
+          <div class="meta-label">Item cost</div>
+          <div class="meta-value" style="color:var(--status-delivered)">${formatMoney(p.item_cost)}</div>
+        </div>` : ''}
+        ${p.order_total != null ? `
+        <div class="meta-item">
+          <div class="meta-label">Order total</div>
+          <div class="meta-value" style="color:var(--status-delivered)">${formatMoney(p.order_total)}</div>
+        </div>` : ''}
+      </div>
+
+      <div class="card-actions">
+        ${p.tracking_url
+          ? `<a class="btn-track" href="${p.tracking_url}" target="_blank" rel="noopener">↗ Track package</a>`
+          : `<span class="btn-track" style="cursor:default;opacity:0.4">No tracking link</span>`
+        }
+        <button class="btn-dismiss" onclick="dismiss('${dismissId}')" title="Dismiss">✕</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+loadData();
+// Auto-refresh every 5 minutes
+setInterval(loadData, 5 * 60 * 1000);
+</script>
+</body>
+</html>
