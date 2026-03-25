@@ -474,28 +474,95 @@ let currentFilter = 'all';
 let currentCarrier = 'all';
 let dismissed = new Set(JSON.parse(localStorage.getItem('dismissed') || '[]'));
 
+const GITHUB_REPO = 'Petergal16/package-tracker';
+const GITHUB_FILE = 'packages.json';
+
+function getToken() {
+  return localStorage.getItem('gh_token') || '';
+}
+
+function showTokenPrompt() {
+  const existing = document.getElementById('token-prompt');
+  if (existing) return;
+  const div = document.createElement('div');
+  div.id = 'token-prompt';
+  div.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;z-index:999';
+  div.innerHTML = `
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:32px;max-width:420px;width:90%">
+      <div style="font-family:var(--mono);font-size:13px;color:var(--accent);margin-bottom:8px">SETUP</div>
+      <div style="font-size:18px;font-weight:500;margin-bottom:8px">Enter your GitHub token</div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:20px">This is saved only in your browser — never sent anywhere except GitHub.</div>
+      <input id="token-input" type="password" placeholder="github_pat_..." style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:10px 12px;color:var(--text);font-family:var(--mono);font-size:12px;outline:none;margin-bottom:12px">
+      <button onclick="saveToken()" style="width:100%;padding:10px;background:var(--accent);border:none;border-radius:6px;color:#fff;font-family:var(--mono);font-size:12px;font-weight:700;cursor:pointer">Save & Load Dashboard</button>
+    </div>`;
+  document.body.appendChild(div);
+  document.getElementById('token-input').focus();
+}
+
+function saveToken() {
+  const val = document.getElementById('token-input').value.trim();
+  if (!val) return;
+  localStorage.setItem('gh_token', val);
+  document.getElementById('token-prompt')?.remove();
+  loadData();
+}
+
 async function loadData() {
   const btn = document.getElementById('refresh-btn');
   btn.classList.add('spinning');
+
+  const token = getToken();
+
+  // Try GitHub API first
+  if (token) {
+    try {
+      const r = await fetch(
+        `https://api.github.com/repos/${GITHUB_REPO}/contents/${GITHUB_FILE}`,
+        { headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3.raw' } }
+      );
+      if (r.status === 401) {
+        localStorage.removeItem('gh_token');
+        showTokenPrompt();
+        btn.classList.remove('spinning');
+        return;
+      }
+      if (r.ok) {
+        const data = await r.json();
+        allPackages = data.packages || [];
+        const lu = data.last_updated
+          ? new Date(data.last_updated).toLocaleString('en-US', {month:'short', day:'numeric', hour:'numeric', minute:'2-digit'})
+          : '—';
+        document.getElementById('last-updated').textContent = lu;
+        document.getElementById('pkg-count').textContent = allPackages.length + ' packages tracked';
+        updateCounts();
+        render();
+        btn.classList.remove('spinning');
+        return;
+      }
+    } catch(e) {}
+  }
+
+  // Try local file (works when opened from the package-tracker folder)
   try {
     const r = await fetch('packages.json?t=' + Date.now());
     if (!r.ok) throw new Error('Not found');
     const data = await r.json();
     allPackages = data.packages || [];
-
     const lu = data.last_updated
       ? new Date(data.last_updated).toLocaleString('en-US', {month:'short', day:'numeric', hour:'numeric', minute:'2-digit'})
       : '—';
     document.getElementById('last-updated').textContent = lu;
     document.getElementById('pkg-count').textContent = allPackages.length + ' packages tracked';
-
     updateCounts();
     render();
   } catch(e) {
-    // Load sample data so the dashboard looks good without the JSON file
-    allPackages = getSampleData();
-    updateCounts();
-    render();
+    if (!token) {
+      showTokenPrompt();
+    } else {
+      allPackages = getSampleData();
+      updateCounts();
+      render();
+    }
   }
   btn.classList.remove('spinning');
 }
