@@ -19,6 +19,24 @@
       "last_updated": "2024-12-19"
     },
     {
+      "email_id": "abdfac217b1abb5210e9ccd6797b4b6b",
+      "retailer": "REI Co-op",
+      "description": "Outdoor gear",
+      "carrier": "Unknown",
+      "tracking_number": null,
+      "tracking_url": null,
+      "status": "shipped",
+      "status_detail": "Your order has shipped",
+      "estimated_delivery": "2026-03-26",
+      "delivered_at": null,
+      "order_number": null,
+      "item_cost": null,
+      "order_total": null,
+      "currency": null,
+      "received_at": "2026-03-24T20:30:47+00:00",
+      "last_updated": "2024-12-28"
+    },
+    {
       "email_id": "54bf2a99f0aac7bd56c0b3ef78361d5a",
       "retailer": "Minnesota Zoo",
       "description": "Gift Membership: Individual Level",
@@ -50,9 +68,9 @@
       "order_number": "A2023050615531879367",
       "item_cost": null,
       "order_total": null,
-      "currency": "USD",
+      "currency": null,
       "received_at": "2023-05-06T19:57:24+00:00",
-      "last_updated": "2024-12-19"
+      "last_updated": "2024-12-28"
     },
     {
       "email_id": "11fc5035abb1403aa1569270a0c49050",
@@ -62,7 +80,7 @@
       "tracking_number": null,
       "tracking_url": null,
       "status": "ordered",
-      "status_detail": "Order being prepared for pickup",
+      "status_detail": "Order received - preparing for pickup",
       "estimated_delivery": null,
       "delivered_at": null,
       "order_number": "MB5901210",
@@ -98,7 +116,7 @@
       "tracking_number": null,
       "tracking_url": null,
       "status": "ordered",
-      "status_detail": "Preparing item",
+      "status_detail": "We're preparing your item",
       "estimated_delivery": null,
       "delivered_at": null,
       "order_number": "A396202926",
@@ -109,6 +127,42 @@
       "last_updated": "2024-12-19"
     },
     {
+      "email_id": "21b9b051aa021a50c56e2dc10b001d39",
+      "retailer": "NOBULL",
+      "description": "Athletic apparel/footwear",
+      "carrier": "Unknown",
+      "tracking_number": null,
+      "tracking_url": null,
+      "status": "shipped",
+      "status_detail": "Order tracking available",
+      "estimated_delivery": null,
+      "delivered_at": null,
+      "order_number": null,
+      "item_cost": null,
+      "order_total": null,
+      "currency": null,
+      "received_at": "2022-02-17T03:25:37+00:00",
+      "last_updated": "2024-12-28"
+    },
+    {
+      "email_id": "5d2c28fe61c3b11b6590517600e69c71",
+      "retailer": "Zenni Optical",
+      "description": "Prescription eyeglasses",
+      "carrier": "Unknown",
+      "tracking_number": null,
+      "tracking_url": null,
+      "status": "shipped",
+      "status_detail": "Order is on the way",
+      "estimated_delivery": null,
+      "delivered_at": null,
+      "order_number": null,
+      "item_cost": null,
+      "order_total": null,
+      "currency": null,
+      "received_at": "2026-03-17T02:10:57+00:00",
+      "last_updated": "2024-12-19"
+    },
+    {
       "email_id": "bb77f224fbc177a221a7f9a9bb82bb9e",
       "retailer": "B&H Photo",
       "description": "Seagate 16TB IronWolf Pro NAS HDD",
@@ -116,9 +170,9 @@
       "tracking_number": "517371169521",
       "tracking_url": "https://www.bhphotovideo.com/find/trackPackage.jsp?orderRef=820f8d7b77c18df0c6d50bfdc58546ac086745f63735ff0da1bc0a4af6f4d30f&trackingNumber=517371169521",
       "status": "delivered",
-      "status_detail": "Delivered on 03/17/26, 05:27 PM",
+      "status_detail": "Package delivered",
       "estimated_delivery": null,
-      "delivered_at": "2026-03-17T17:27:00-04:00",
+      "delivered_at": "2026-03-17T21:27:00-04:00",
       "order_number": "1127796838",
       "item_cost": null,
       "order_total": null,
@@ -127,5 +181,5 @@
       "last_updated": "2024-12-19"
     }
   ],
-  "last_updated": "2026-03-25T01:56:51.546361+00:00"
+  "last_updated": "2026-03-25T22:16:07.012246+00:00"
 }
