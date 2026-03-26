@@ -69,7 +69,7 @@ SEARCH_SUBJECTS = [
     "Amazon",
 ]
 
-# Change this date if needed later
+# Change this later if you want a different recent window
 SEARCH_SINCE = "20-Mar-2026"
 
 STATUS_RANK = {
@@ -139,8 +139,6 @@ def clean_email_body(raw_html: str) -> str:
         return ""
 
     text = raw_html
-
-    # Decode quoted-printable remnants like =3D etc if still present in chunks
     text = text.replace("=\r\n", "").replace("=\n", "")
     text = html.unescape(text)
 
@@ -201,6 +199,7 @@ def extract_focus_section(text: str) -> str:
         "better trucks",
         "black diamond",
         "walmart",
+        "fleet farm",
         "nobull",
         "rei co-op",
         "product",
@@ -216,7 +215,6 @@ def extract_focus_section(text: str) -> str:
             end = min(len(text), idx + 1200)
             snippets.append(text[start:end])
 
-    # Always include head too because subject/order summary often lives there
     head = text[:2500]
 
     if snippets:
@@ -225,7 +223,7 @@ def extract_focus_section(text: str) -> str:
         combined = head
 
     combined = re.sub(r'\s+', ' ', combined).strip()
-    return combined[:8000]
+    return combined[:9000]
 
 
 def get_email_body(msg) -> str:
@@ -282,7 +280,7 @@ def get_email_body(msg) -> str:
     else:
         body = plain_body or html_text
 
-    return body[:15000].strip()
+    return body[:20000].strip()
 
 
 # ── IMAP fetching ──────────────────────────────────────────────────────────────
@@ -397,7 +395,7 @@ Respond with a JSON array only. No markdown.
 Each object must have exactly these fields:
 {{
   "email_id": "<the ID from the email header above>",
-  "retailer": "<store or sender name, e.g. Amazon, REI Co-op, Walmart.com, NOBULL>",
+  "retailer": "<store or sender name, e.g. Amazon, REI Co-op, Walmart.com, Fleet Farm>",
   "description": "<actual product name from the email body>",
   "carrier": "<UPS | FedEx | USPS | DHL | Amazon Logistics | Better Trucks | Other | Unknown>",
   "tracking_number": "<tracking number string or null>",
@@ -475,7 +473,108 @@ Formatting rules:
     return packages
 
 
-# ── Cleanup / tracking helpers ────────────────────────────────────────────────
+# ── Heuristic extraction helpers ───────────────────────────────────────────────
+
+def extract_product_from_text(text: str) -> str | None:
+    """
+    Hard fallback extraction for product names when Claude returns 'Package'.
+    """
+    if not text:
+        return None
+
+    # Common branded patterns
+    brand_patterns = [
+        r"(Black Diamond[^\n]{0,120})",
+        r"(ThermoPro[^\n]{0,120})",
+        r"(Patagonia[^\n]{0,120})",
+        r"(Columbia[^\n]{0,120})",
+        r"(Salomon[^\n]{0,120})",
+        r"(HOKA[^\n]{0,120})",
+        r"(Garmin[^\n]{0,120})",
+        r"(YETI[^\n]{0,120})",
+    ]
+
+    for pattern in brand_patterns:
+        m = re.search(pattern, text, flags=re.IGNORECASE)
+        if m:
+            value = re.sub(r'\s+', ' ', m.group(1)).strip(" -:,.")
+            if len(value) > 8:
+                return value
+
+    # Look for product block before qty/item #
+    generic_patterns = [
+        r"([A-Z][A-Za-z0-9,&()\/\-\.\' ]{12,120})\s+Qty:",
+        r"([A-Z][A-Za-z0-9,&()\/\-\.\' ]{12,120})\s+Item\s*#",
+        r"([A-Z][A-Za-z0-9,&()\/\-\.\' ]{12,120})\s+One Size",
+        r"([A-Z][A-Za-z0-9,&()\/\-\.\' ]{12,120})\s+Size",
+    ]
+
+    for pattern in generic_patterns:
+        m = re.search(pattern, text, flags=re.IGNORECASE)
+        if m:
+            value = re.sub(r'\s+', ' ', m.group(1)).strip(" -:,.")
+            if len(value) > 8:
+                return value
+
+    return None
+
+
+def extract_tracking_number_from_text(text: str) -> str | None:
+    if not text:
+        return None
+
+    patterns = [
+        r"Tracking number:\s*([A-Z0-9_]+)",
+        r"tracking number\s*[:#]?\s*([A-Z0-9_]+)",
+        r"\b(BTP_[A-Z0-9]+)\b",
+        r"\b(1Z[0-9A-Z]+)\b",  # UPS-like
+        r"\b([0-9]{12,22})\b",  # numeric tracking-ish
+    ]
+
+    for pattern in patterns:
+        m = re.search(pattern, text, flags=re.IGNORECASE)
+        if m:
+            return m.group(1).strip()
+
+    return None
+
+
+def extract_tracking_url_from_text(text: str) -> str | None:
+    if not text:
+        return None
+
+    # Prefer "Track package [LINK: ...]"
+    m = re.search(r"Track package\s*\[LINK:\s*(https?://[^\]\s]+)\]", text, flags=re.IGNORECASE)
+    if m:
+        return m.group(1).strip()
+
+    # Generic LINK capture
+    m = re.search(r"\[LINK:\s*(https?://[^\]\s]+)\]", text, flags=re.IGNORECASE)
+    if m:
+        return m.group(1).strip()
+
+    return None
+
+
+def infer_carrier_from_text(text: str) -> str | None:
+    if not text:
+        return None
+
+    lowered = text.lower()
+
+    if "better trucks" in lowered:
+        return "Better Trucks"
+    if "ups" in lowered:
+        return "UPS"
+    if "fedex" in lowered:
+        return "FedEx"
+    if "usps" in lowered:
+        return "USPS"
+    if "dhl" in lowered:
+        return "DHL"
+
+    return None
+
 
 def build_tracking_url(carrier: str | None, tracking_number: str | None) -> str | None:
     if not tracking_number:
@@ -496,7 +595,9 @@ def build_tracking_url(carrier: str | None, tracking_number: str | None) -> str 
     return None
 
 
-def clean_extracted_packages(packages: list[dict]) -> list[dict]:
+# ── Cleanup / enrichment ───────────────────────────────────────────────────────
+
+def clean_extracted_packages(packages: list[dict], email_lookup: dict[str, dict]) -> list[dict]:
     cleaned = []
 
     weak_descriptions = {
@@ -515,6 +616,10 @@ def clean_extracted_packages(packages: list[dict]) -> list[dict]:
     }
 
     for pkg in packages:
+        email_id_value = pkg.get("email_id")
+        source_email = email_lookup.get(email_id_value, {})
+        raw_text = source_email.get("body", "")
+
         retailer = (pkg.get("retailer") or "").strip()
         description = (pkg.get("description") or "").strip()
         status_detail = (pkg.get("status_detail") or "").lower()
@@ -523,25 +628,52 @@ def clean_extracted_packages(packages: list[dict]) -> list[dict]:
         status = (pkg.get("status") or "unknown").strip().lower()
 
         # Skip pickup-only
-        if "pickup" in status_detail:
+        if "pickup" in status_detail or "pickup" in raw_text.lower():
             continue
 
-        # Skip weak junk with no useful tracking info
+        # Hard-fix weak descriptions
+        if description.lower() in weak_descriptions:
+            extracted_product = extract_product_from_text(raw_text)
+            if extracted_product:
+                pkg["description"] = extracted_product
+            else:
+                pkg["description"] = f"{retailer} order" if retailer else "Order"
+
+        # Fill tracking number if Claude missed it
+        if not tracking_number:
+            extracted_tracking = extract_tracking_number_from_text(raw_text)
+            if extracted_tracking:
+                pkg["tracking_number"] = extracted_tracking
+                tracking_number = extracted_tracking
+
+        # Fill tracking URL if Claude missed it
+        if not tracking_url:
+            extracted_url = extract_tracking_url_from_text(raw_text)
+            if extracted_url:
+                pkg["tracking_url"] = extracted_url
+                tracking_url = extracted_url
+
+        # Fill carrier if Claude missed it
+        if not pkg.get("carrier") or pkg.get("carrier") == "Unknown":
+            extracted_carrier = infer_carrier_from_text(raw_text)
+            if extracted_carrier:
+                pkg["carrier"] = extracted_carrier
+
+        # Fallback carrier URL build if possible
+        if not pkg.get("tracking_url") and pkg.get("tracking_number"):
+            built_url = build_tracking_url(pkg.get("carrier"), pkg.get("tracking_number"))
+            if built_url:
+                pkg["tracking_url"] = built_url
+
+        # Drop weak junk entries with no useful tracking info
+        final_desc = (pkg.get("description") or "").strip().lower()
         if (
-            description.lower() in weak_descriptions
-            and not tracking_number
-            and not tracking_url
+            final_desc in weak_descriptions
+            and not pkg.get("tracking_number")
+            and not pkg.get("tracking_url")
             and status in {"ordered", "unknown"}
         ):
             continue
-
-        # Improve weak descriptions we do keep
-        if description.lower() in weak_descriptions:
-            pkg["description"] = f"{retailer} order" if retailer else "Order"
-
-        # Build fallback carrier tracking URL if possible
-        if not tracking_url and tracking_number:
-            pkg["tracking_url"] = build_tracking_url(pkg.get("carrier"), tracking_number)
 
         cleaned.append(pkg)
 
@@ -638,7 +770,9 @@ def run(dry_run: bool = False, max_emails: int = 50) -> None:
 
     print("📦 Extracting package data with Claude…")
     new_packages = parse_with_claude(new_emails)
-    new_packages = clean_extracted_packages(new_packages)
+
+    email_lookup = {e["id"]: e for e in new_emails}
+    new_packages = clean_extracted_packages(new_packages, email_lookup)
 
     if dry_run:
         print("\n🧪 Dry run — extracted packages (not saved):")
