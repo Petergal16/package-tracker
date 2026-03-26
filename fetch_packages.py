@@ -68,7 +68,7 @@ SEARCH_SUBJECTS = [
     "Amazon",
 ]
 
-# Adjust this if you want a different recent window
+# Only scan recent inbox emails so very old stuff does not keep resurfacing.
 SEARCH_SINCE = "20-Mar-2026"
 
 STATUS_RANK = {
@@ -203,7 +203,6 @@ def get_email_body(msg) -> str:
 
     body = plain_body.strip()
 
-    # If plain text is short/weak, prefer HTML
     if len(body) < 500 and html_body:
         body = html_to_text_with_links(html_body)
     elif html_body:
@@ -211,7 +210,6 @@ def get_email_body(msg) -> str:
 
     body = body.strip()
 
-    # If long, keep useful sections around keywords plus head/tail
     if len(body) > 8000:
         keywords = [
             "tracking number",
@@ -331,6 +329,38 @@ def fetch_shipping_emails(max_emails: int = 50) -> list[dict]:
 
 # ── Claude parsing ─────────────────────────────────────────────────────────────
 
+def extract_focus_section(text: str) -> str:
+    text_lower = text.lower()
+
+    keywords = [
+        "just shipped",
+        "tracking number",
+        "track package",
+        "carrier:",
+        "item #",
+        "qty:",
+        "delivered",
+        "order #",
+        "shipping to:",
+        "item",
+        "product",
+    ]
+
+    snippets = []
+
+    for kw in keywords:
+        idx = text_lower.find(kw)
+        if idx != -1:
+            start = max(0, idx - 200)
+            end = min(len(text), idx + 800)
+            snippets.append(text[start:end])
+
+    if snippets:
+        return "\n\n---FOCUSED CONTENT---\n\n".join(snippets[:5])
+
+    return text[:2000]
+
+
 def parse_with_claude(emails: list[dict]) -> list[dict]:
     """
     Send batches of emails to Claude and extract structured package data.
@@ -351,7 +381,7 @@ def parse_with_claude(emails: list[dict]) -> list[dict]:
             f"Subject: {e['subject']}\n"
             f"Received: {e['received_at']}\n"
             f"ID: {e['id']}\n\n"
-            f"Body:\n{e['body']}"
+            f"IMPORTANT SECTION:\n{extract_focus_section(e['body'])}"
             for j, e in enumerate(batch)
         )
 
@@ -463,8 +493,6 @@ def build_tracking_url(carrier: str | None, tracking_number: str | None) -> str 
     if "dhl" in carrier_text:
         return f"https://www.dhl.com/us-en/home/tracking.html?tracking-id={tn}"
 
-    # Better Trucks doesn’t have a stable public URL pattern I trust here,
-    # so only use direct links from the email for that carrier.
     return None
 
 
@@ -493,11 +521,9 @@ def clean_extracted_packages(packages: list[dict]) -> list[dict]:
         tracking_url = pkg.get("tracking_url")
         status = (pkg.get("status") or "unknown").strip().lower()
 
-        # Skip pickup-only orders
         if "pickup" in status_detail:
             continue
 
-        # Skip weak junk entries with no real tracking info
         if (
             description.lower() in weak_descriptions
             and not tracking_number
@@ -506,11 +532,9 @@ def clean_extracted_packages(packages: list[dict]) -> list[dict]:
         ):
             continue
 
-        # Improve weak descriptions that are still worth keeping
         if description.lower() in weak_descriptions:
             pkg["description"] = f"{retailer} order" if retailer else "Order"
 
-        # Build fallback carrier tracking URL if we can
         if not pkg.get("tracking_url") and pkg.get("tracking_number"):
             pkg["tracking_url"] = build_tracking_url(
                 pkg.get("carrier"),
@@ -525,11 +549,6 @@ def clean_extracted_packages(packages: list[dict]) -> list[dict]:
 # ── Merge logic ────────────────────────────────────────────────────────────────
 
 def merge_packages(existing: list[dict], new_packages: list[dict]) -> list[dict]:
-    """
-    Merge new packages into existing list.
-    Prefer dedupe by tracking_number, then order_number, then email_id.
-    Keep the most advanced status.
-    """
     by_tracking = {
         p["tracking_number"]: i
         for i, p in enumerate(existing)
