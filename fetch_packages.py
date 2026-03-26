@@ -182,13 +182,13 @@ def fetch_emails_from_folder(mail, folder: str, max_emails: int) -> list[dict]:
 
     all_ids = set()
 
-    for kw in SEARCH_SUBJECTS[:10]:
-        try:
-            _, data = mail.search(None, f'(SUBJECT "{kw}")')
-            if data and data[0]:
-                all_ids.update(data[0].split())
-        except Exception:
-            pass
+   for kw in SEARCH_SUBJECTS[:10]:
+    try:
+        _, data = mail.search(None, f'(SINCE "20-Mar-2026" SUBJECT "{kw}")')
+        if data and data[0]:
+            all_ids.update(data[0].split())
+    except Exception:
+        pass
 
     emails = []
 
