@@ -8,6 +8,7 @@ packages.json.
 import os
 import re
 import json
+import html
 import imaplib
 import email
 import email.header
@@ -68,7 +69,7 @@ SEARCH_SUBJECTS = [
     "Amazon",
 ]
 
-# Only scan recent inbox emails so very old stuff does not keep resurfacing.
+# Change this date if needed later
 SEARCH_SINCE = "20-Mar-2026"
 
 STATUS_RANK = {
@@ -114,7 +115,7 @@ def email_id(msg_id: str, subject: str) -> str:
     return hashlib.md5(f"{msg_id}{subject}".encode("utf-8")).hexdigest()
 
 
-# ── IMAP helpers ───────────────────────────────────────────────────────────────
+# ── Email parsing helpers ──────────────────────────────────────────────────────
 
 def decode_header_value(val: str) -> str:
     if not val:
@@ -129,37 +130,106 @@ def decode_header_value(val: str) -> str:
     return "".join(result).strip()
 
 
-def html_to_text_with_links(html: str) -> str:
+def clean_email_body(raw_html: str) -> str:
     """
-    Preserve link text + href before stripping tags so Claude can still see
-    'Track package' URLs from HTML emails.
+    Convert HTML email into readable text while preserving links as:
+    Link Text [LINK: https://...]
     """
-    html = re.sub(
+    if not raw_html:
+        return ""
+
+    text = raw_html
+
+    # Decode quoted-printable remnants like =3D etc if still present in chunks
+    text = text.replace("=\r\n", "").replace("=\n", "")
+    text = html.unescape(text)
+
+    # Preserve anchor text + href
+    text = re.sub(
         r'<a[^>]+href=["\']([^"\']+)["\'][^>]*>(.*?)</a>',
-        lambda m: f"{re.sub(r'<[^>]+>', ' ', m.group(2))} [LINK: {m.group(1)}]",
-        html,
+        lambda m: f"{re.sub(r'<[^>]+>', ' ', m.group(2)).strip()} [LINK: {m.group(1)}]",
+        text,
         flags=re.IGNORECASE | re.DOTALL,
     )
 
-    html = re.sub(r'<br\s*/?>', '\n', html, flags=re.IGNORECASE)
-    html = re.sub(r'</p\s*>', '\n', html, flags=re.IGNORECASE)
-    html = re.sub(r'</div\s*>', '\n', html, flags=re.IGNORECASE)
-    html = re.sub(r'</tr\s*>', '\n', html, flags=re.IGNORECASE)
-    html = re.sub(r'</li\s*>', '\n', html, flags=re.IGNORECASE)
-    html = re.sub(r'<[^>]+>', ' ', html)
+    # Helpful line breaks before stripping tags
+    text = re.sub(r'<br\s*/?>', '\n', text, flags=re.IGNORECASE)
+    text = re.sub(r'</p\s*>', '\n', text, flags=re.IGNORECASE)
+    text = re.sub(r'</div\s*>', '\n', text, flags=re.IGNORECASE)
+    text = re.sub(r'</tr\s*>', '\n', text, flags=re.IGNORECASE)
+    text = re.sub(r'</li\s*>', '\n', text, flags=re.IGNORECASE)
+    text = re.sub(r'</td\s*>', ' ', text, flags=re.IGNORECASE)
+    text = re.sub(r'</h[1-6]\s*>', '\n', text, flags=re.IGNORECASE)
 
-    html = html.replace("&nbsp;", " ")
-    html = html.replace("&amp;", "&")
-    html = html.replace("&lt;", "<")
-    html = html.replace("&gt;", ">")
+    # Strip remaining tags
+    text = re.sub(r'<[^>]+>', ' ', text, flags=re.DOTALL)
 
-    html = re.sub(r'[ \t]+', ' ', html)
-    html = re.sub(r'\n\s*\n+', '\n\n', html)
-    return html.strip()
+    # Normalize whitespace
+    text = text.replace("\xa0", " ")
+    text = re.sub(r'[ \t]+', ' ', text)
+    text = re.sub(r'\n\s*\n+', '\n\n', text)
+    text = re.sub(r' +\n', '\n', text)
+    text = re.sub(r'\n +', '\n', text)
+
+    return text.strip()
+
+
+def extract_focus_section(text: str) -> str:
+    """
+    Pull the most useful snippets for Claude so it focuses on the actual
+    shipping details instead of the entire messy email.
+    """
+    if not text:
+        return ""
+
+    text_lower = text.lower()
+
+    keywords = [
+        "just shipped",
+        "your order has shipped",
+        "on the move",
+        "estimated arrival",
+        "track package",
+        "tracking number",
+        "carrier:",
+        "shipped via",
+        "order #",
+        "qty:",
+        "item #",
+        "shipping to:",
+        "delivered",
+        "better trucks",
+        "black diamond",
+        "walmart",
+        "nobull",
+        "rei co-op",
+        "product",
+        "item",
+    ]
+
+    snippets = []
+
+    for kw in keywords:
+        idx = text_lower.find(kw)
+        if idx != -1:
+            start = max(0, idx - 250)
+            end = min(len(text), idx + 1200)
+            snippets.append(text[start:end])
+
+    # Always include head too because subject/order summary often lives there
+    head = text[:2500]
+
+    if snippets:
+        combined = head + "\n\n---FOCUSED CONTENT---\n\n" + "\n\n---\n\n".join(snippets[:8])
+    else:
+        combined = head
+
+    combined = re.sub(r'\s+', ' ', combined).strip()
+    return combined[:8000]
 
 
 def get_email_body(msg) -> str:
-    """Extract useful email text, preserving links from HTML when possible."""
+    """Extract useful email text from plain text and/or HTML."""
     plain_body = ""
     html_body = ""
 
@@ -201,57 +271,23 @@ def get_email_body(msg) -> str:
         except Exception:
             pass
 
-    body = plain_body.strip()
+    plain_body = (plain_body or "").strip()
+    html_text = clean_email_body(html_body) if html_body else ""
 
-    if len(body) < 500 and html_body:
-        body = html_to_text_with_links(html_body)
-    elif html_body:
-        body = body + "\n\nHTML VERSION:\n" + html_to_text_with_links(html_body)
+    # Prefer HTML when plain text is weak/generic
+    if len(plain_body) < 500 and html_text:
+        body = html_text
+    elif plain_body and html_text:
+        body = plain_body + "\n\nHTML VERSION:\n" + html_text
+    else:
+        body = plain_body or html_text
 
-    body = body.strip()
+    return body[:15000].strip()
 
-    if len(body) > 8000:
-        keywords = [
-            "tracking number",
-            "track package",
-            "just shipped",
-            "carrier:",
-            "item #",
-            "qty:",
-            "delivered",
-            "order #",
-            "shipping to:",
-            "product",
-            "item",
-            "shipment",
-            "tracking",
-        ]
 
-        snippets = []
-        lowered = body.lower()
-
-        for kw in keywords:
-            idx = lowered.find(kw)
-            if idx != -1:
-                start = max(0, idx - 300)
-                end = min(len(body), idx + 900)
-                snippets.append(body[start:end])
-
-        head = body[:2000]
-        tail = body[-2000:]
-        combined = head
-
-        if snippets:
-            combined += "\n\n---\n\n" + "\n\n---\n\n".join(snippets[:8])
-
-        combined += "\n\n---\n\n" + tail
-        body = re.sub(r'\s+', ' ', combined).strip()
-
-    return body[:12000]
-
+# ── IMAP fetching ──────────────────────────────────────────────────────────────
 
 def fetch_emails_from_folder(mail, folder: str, max_emails: int) -> list[dict]:
-    """Search one IMAP folder for likely shipping emails."""
     try:
         status, _ = mail.select(f'"{folder}"', readonly=True)
         if status != "OK":
@@ -308,7 +344,6 @@ def fetch_emails_from_folder(mail, folder: str, max_emails: int) -> list[dict]:
 
 
 def fetch_shipping_emails(max_emails: int = 50) -> list[dict]:
-    """Connect to IMAP and search INBOX ONLY."""
     profile = IMAP_PROFILES.get(EMAIL_PROVIDER)
     if not profile:
         raise ValueError(f"Unknown provider: {EMAIL_PROVIDER}. Choose: {list(IMAP_PROFILES)}")
@@ -329,43 +364,7 @@ def fetch_shipping_emails(max_emails: int = 50) -> list[dict]:
 
 # ── Claude parsing ─────────────────────────────────────────────────────────────
 
-def extract_focus_section(text: str) -> str:
-    text_lower = text.lower()
-
-    keywords = [
-        "just shipped",
-        "tracking number",
-        "track package",
-        "carrier:",
-        "item #",
-        "qty:",
-        "delivered",
-        "order #",
-        "shipping to:",
-        "item",
-        "product",
-    ]
-
-    snippets = []
-
-    for kw in keywords:
-        idx = text_lower.find(kw)
-        if idx != -1:
-            start = max(0, idx - 200)
-            end = min(len(text), idx + 800)
-            snippets.append(text[start:end])
-
-    if snippets:
-        return "\n\n---FOCUSED CONTENT---\n\n".join(snippets[:5])
-
-    return text[:2000]
-
-
 def parse_with_claude(emails: list[dict]) -> list[dict]:
-    """
-    Send batches of emails to Claude and extract structured package data.
-    Returns list of package dicts.
-    """
     client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
     packages = []
     batch_size = 5
@@ -398,7 +397,7 @@ Respond with a JSON array only. No markdown.
 Each object must have exactly these fields:
 {{
   "email_id": "<the ID from the email header above>",
-  "retailer": "<store or sender name, e.g. Amazon, REI Co-op, Backcountry>",
+  "retailer": "<store or sender name, e.g. Amazon, REI Co-op, Walmart.com, NOBULL>",
   "description": "<actual product name from the email body>",
   "carrier": "<UPS | FedEx | USPS | DHL | Amazon Logistics | Better Trucks | Other | Unknown>",
   "tracking_number": "<tracking number string or null>",
@@ -429,14 +428,15 @@ Description rules:
   - "Items shipped"
   - "Track your order"
 - Do NOT use "Package" as the description.
-- Look carefully for line items, product titles, SKU lines, item blocks, or receipt details.
+- Look carefully for line items, product titles, item name blocks, SKU lines, qty lines, size/color lines, or text near product images.
 - If multiple items are listed, choose the first specific item name, or list the first two short product names separated by a comma.
 - If no exact item name can be found anywhere, use a short fallback like "<retailer> order". Never use "Package".
 
 Tracking rules:
 - If the email contains a direct tracking link, return it in tracking_url.
 - If the email contains a tracking number but no direct tracking link, still return the tracking_number.
-- If the email says "Track package" and a URL is present in brackets like [LINK: ...], use that URL.
+- If the email says "Track package" and a URL is present in text like [LINK: ...], use that URL.
+- Extract tracking numbers even if they look like BTP_014409X03JT.
 - If the carrier can be inferred from the email, set it accordingly.
 - Better Trucks is a valid carrier.
 
@@ -511,6 +511,7 @@ def clean_extracted_packages(packages: list[dict]) -> list[dict]:
         "track your order",
         "thank you for your order",
         "your order has shipped",
+        "thanks for your order",
     }
 
     for pkg in packages:
@@ -521,9 +522,11 @@ def clean_extracted_packages(packages: list[dict]) -> list[dict]:
         tracking_url = pkg.get("tracking_url")
         status = (pkg.get("status") or "unknown").strip().lower()
 
+        # Skip pickup-only
         if "pickup" in status_detail:
             continue
 
+        # Skip weak junk with no useful tracking info
         if (
             description.lower() in weak_descriptions
             and not tracking_number
@@ -532,14 +535,13 @@ def clean_extracted_packages(packages: list[dict]) -> list[dict]:
         ):
             continue
 
+        # Improve weak descriptions we do keep
         if description.lower() in weak_descriptions:
             pkg["description"] = f"{retailer} order" if retailer else "Order"
 
-        if not pkg.get("tracking_url") and pkg.get("tracking_number"):
-            pkg["tracking_url"] = build_tracking_url(
-                pkg.get("carrier"),
-                pkg.get("tracking_number")
-            )
+        # Build fallback carrier tracking URL if possible
+        if not tracking_url and tracking_number:
+            pkg["tracking_url"] = build_tracking_url(pkg.get("carrier"), tracking_number)
 
         cleaned.append(pkg)
 
