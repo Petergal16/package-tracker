@@ -55,6 +55,24 @@
       "last_updated": "2024-12-19"
     },
     {
+      "email_id": "abdfac217b1abb5210e9ccd6797b4b6b",
+      "retailer": "REI Co-op",
+      "description": "Your order has shipped",
+      "carrier": "Unknown",
+      "tracking_number": null,
+      "tracking_url": null,
+      "status": "shipped",
+      "status_detail": "Order shipped",
+      "estimated_delivery": "2026-03-26",
+      "delivered_at": null,
+      "order_number": null,
+      "item_cost": null,
+      "order_total": null,
+      "currency": null,
+      "received_at": "2026-03-24T20:30:47+00:00",
+      "last_updated": "2024-12-19"
+    },
+    {
       "email_id": "54bf2a99f0aac7bd56c0b3ef78361d5a",
       "retailer": "Minnesota Zoo",
       "description": "Gift Membership: Individual Level",
@@ -75,7 +93,7 @@
     {
       "email_id": "2fecf647035c9e621d70da1c3761077f",
       "retailer": "Adorama",
-      "description": "Camera/photography equipment",
+      "description": "Adorama - Thank you for your order",
       "carrier": "Unknown",
       "tracking_number": null,
       "tracking_url": null,
@@ -94,7 +112,7 @@
       "email_id": "11fc5035abb1403aa1569270a0c49050",
       "retailer": "Fleet Farm",
       "description": "ThermoPro TP828BW Wireless Meat Thermometer",
-      "carrier": "Unknown",
+      "carrier": "Other",
       "tracking_number": null,
       "tracking_url": null,
       "status": "ordered",
@@ -128,8 +146,8 @@
     },
     {
       "email_id": "ab034cdbe6912501ebd7d6f33e5b59d6",
-      "retailer": "REI",
-      "description": "Item",
+      "retailer": "REI Co-op",
+      "description": "Thanks for your order! (#A396202926)",
       "carrier": "Unknown",
       "tracking_number": null,
       "tracking_url": null,
@@ -217,6 +235,60 @@
       "last_updated": "2024-12-19"
     },
     {
+      "email_id": "21b9b051aa021a50c56e2dc10b001d39",
+      "retailer": "NOBULL",
+      "description": "Track your order from NOBULL",
+      "carrier": "Unknown",
+      "tracking_number": null,
+      "tracking_url": null,
+      "status": "unknown",
+      "status_detail": "Tracking available",
+      "estimated_delivery": null,
+      "delivered_at": null,
+      "order_number": null,
+      "item_cost": null,
+      "order_total": null,
+      "currency": null,
+      "received_at": "2022-02-17T03:25:37+00:00",
+      "last_updated": "2024-12-19"
+    },
+    {
+      "email_id": "328a245db2ddb982c58fcd1744ded340",
+      "retailer": "Redeem Giftcards",
+      "description": "Your order is on the way",
+      "carrier": "Unknown",
+      "tracking_number": null,
+      "tracking_url": null,
+      "status": "shipped",
+      "status_detail": "Your order is on the way",
+      "estimated_delivery": null,
+      "delivered_at": null,
+      "order_number": null,
+      "item_cost": null,
+      "order_total": null,
+      "currency": null,
+      "received_at": "2022-09-13T20:34:24+00:00",
+      "last_updated": "2024-12-19"
+    },
+    {
+      "email_id": "5d2c28fe61c3b11b6590517600e69c71",
+      "retailer": "Zenni Optical",
+      "description": "Your Order Is On The Way!",
+      "carrier": "Unknown",
+      "tracking_number": null,
+      "tracking_url": null,
+      "status": "shipped",
+      "status_detail": "Order is on the way",
+      "estimated_delivery": null,
+      "delivered_at": null,
+      "order_number": null,
+      "item_cost": null,
+      "order_total": null,
+      "currency": null,
+      "received_at": "2026-03-17T02:10:57+00:00",
+      "last_updated": "2024-12-19"
+    },
+    {
       "email_id": "bb77f224fbc177a221a7f9a9bb82bb9e",
       "retailer": "B&H Photo",
       "description": "Seagate 16TB IronWolf Pro NAS HDD",
@@ -235,5 +307,5 @@
       "last_updated": "2024-12-19"
     }
   ],
-  "last_updated": "2026-03-26T02:28:16.827835+00:00"
+  "last_updated": "2026-03-26T15:01:47.733293+00:00"
 }
