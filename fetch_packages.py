@@ -275,7 +275,7 @@ def parse_with_claude(emails: list[dict]) -> list[dict]:
 
         today_str = datetime.now().strftime("%Y-%m-%d")
 
-        prompt = f"""You are a package tracking parser. Extract shipping and delivery information from these emails.
+     prompt = f"""You are a package tracking parser. Extract shipping and delivery information from these emails.
 
 Only include emails that are truly about physical product orders, shipping, tracking, or delivery.
 Skip newsletters, promotions, gift cards, memberships, digital purchases, and pickup-only orders.
@@ -288,8 +288,8 @@ Respond with a JSON array only. No markdown.
 Each object must have exactly these fields:
 {{
   "email_id": "<the ID from the email header above>",
-  "retailer": "<store or sender name, e.g. Amazon, REI, Backcountry>",
-  "description": "<specific product name if present; avoid generic phrases like 'your order' or 'gear order'>",
+  "retailer": "<store or sender name, e.g. Amazon, REI Co-op, Backcountry>",
+  "description": "<actual product name from the email body>",
   "carrier": "<UPS | FedEx | USPS | DHL | Amazon Logistics | Other | Unknown>",
   "tracking_number": "<tracking number string or null>",
   "tracking_url": "<direct tracking URL if present or null>",
@@ -305,40 +305,40 @@ Each object must have exactly these fields:
   "last_updated": "{today_str}"
 }}
 
-Rules:
-- Prefer the actual item/product name from the email body.
-- Never use generic descriptions like "your order", "gear order", "package", "items shipped".
-- If multiple items are listed, use the first 1–2 real item names.
-- If no real product name exists, use null-like behavior by falling back to a cleaned version of the subject without words like shipped, order, tracking, delivery, package.
+Description rules:
+- Extract the real product name from the email body whenever possible.
+- Good descriptions are specific product titles like:
+  - "Black Diamond Distance Carbon Z Poles"
+  - "Patagonia Torrentshell 3L Jacket"
+  - "ThermoPro TP828BW Wireless Meat Thermometer"
+- Bad descriptions are generic phrases like:
+  - "Package"
+  - "Your order"
+  - "Order shipped"
+  - "Outdoor gear"
+  - "Items shipped"
+  - "Product"
+- Do NOT use "Package" as the description.
+- If multiple items are listed, choose the first specific item name, or list the first two short product names separated by a comma.
+- Look carefully in the email body for item names, line items, product titles, SKU lines, or receipt details.
+- If the subject line is generic but the email body contains specific items, use the specific item from the body.
+- If no exact item name can be found anywhere, use a short fallback like "<retailer> order". Never use "Package".
+
+Tracking rules:
+- If the email contains a direct tracking link, return it in tracking_url.
+- If the email contains a tracking number but no direct tracking link, still return the tracking number.
+- If neither exists, return null for both.
+- If the carrier can be inferred from the tracking section, set the carrier accordingly.
+
+Filtering rules:
 - Only include physical shipped items.
-- If there is no tracking link in the email, return null.
-- If there is no tracking number, return null.
+- Skip pickup-only orders.
+- Skip store memberships, gift cards, digital items, and promotional emails.
+
+Formatting rules:
 - Strip currency symbols and return numbers only.
+- Use null for missing values.
 """
-
-        msg = client.messages.create(
-            model="claude-sonnet-4-20250514",
-            max_tokens=2000,
-            messages=[{"role": "user", "content": prompt}],
-        )
-
-        raw = msg.content[0].text.strip()
-
-        if raw.startswith("```"):
-            raw = raw.split("\n", 1)[1].rsplit("```", 1)[0].strip()
-
-        try:
-            batch_packages = json.loads(raw)
-            if isinstance(batch_packages, list):
-                packages.extend(batch_packages)
-                print(f"     → Extracted {len(batch_packages)} package(s)")
-            else:
-                print("  ⚠ Claude response was not a JSON array.")
-        except json.JSONDecodeError as e:
-            print(f"  ⚠ JSON parse error: {e}")
-            print(f"     Raw: {raw[:300]}")
-
-    return packages
 
 
 # ── Merge logic ────────────────────────────────────────────────────────────────
