@@ -245,7 +245,7 @@ Respond with a JSON array only, no markdown. Each object must have exactly these
 {{
   "email_id": "<the ID from the email header above>",
   "retailer": "<store or sender name, e.g. 'Amazon', 'REI', 'Backcountry'>",
-  "description": "<what was ordered, 1 short phrase, e.g. 'Black Diamond trekking poles'>",
+  "description": "<SPECIFIC product name — look hard in the email body for the actual item name, model number, or product title. Examples: 'REI Co-op Flash 55 Backpack', 'Nike Air Zoom Pegasus 40', 'Garmin Fenix 7'. NEVER use generic phrases like 'outdoor gear order' or 'your order'. If multiple items, list the first 2 separated by commas. If truly no product name exists anywhere in the email, use the subject line minus words like 'shipped' or 'order'.>",
   "carrier": "<UPS | FedEx | USPS | DHL | Amazon Logistics | Other | Unknown>",
   "tracking_number": "<tracking number string or null>",
   "tracking_url": "<direct tracking URL if present or null>",
