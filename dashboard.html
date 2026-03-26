@@ -666,6 +666,7 @@ function setCarrier(c, el) {
 }
 
 function dismiss(id) {
+  if (!id || id === 'null' || id === 'undefined') return;
   dismissed.add(id);
   localStorage.setItem('dismissed', JSON.stringify([...dismissed]));
   render();
@@ -686,8 +687,9 @@ function progressSteps(status) {
 function render() {
   const query = document.getElementById('search').value.toLowerCase();
 
-  let pkgs = allPackages.filter(p => {
-    if (dismissed.has(p.tracking_number || p.order_number)) return false;
+  let pkgs = allPackages.filter((p, i) => {
+    const pid = p.tracking_number || p.order_number || p.email_id || `pkg_${i}_${p.retailer}_${p.description}`.replace(/\s+/g,'_');
+    if (dismissed.has(pid)) return false;
     if (currentFilter === 'active' && (p.status === 'delivered' || p.status === 'unknown')) return false;
     if (currentFilter === 'delivered' && p.status !== 'delivered') return false;
     if (currentFilter === 'out_for_delivery' && p.status !== 'out_for_delivery') return false;
@@ -717,7 +719,7 @@ function render() {
     const eta = p.status === 'delivered'
       ? `<div class="meta-item"><div class="meta-label">Delivered</div><div class="meta-value highlight">${formatDate(p.delivered_at)}</div></div>`
       : `<div class="meta-item"><div class="meta-label">Est. delivery</div><div class="meta-value highlight">${formatDate(p.estimated_delivery)}</div></div>`;
-    const dismissId = p.tracking_number || p.order_number;
+    const dismissId = p.tracking_number || p.order_number || p.email_id || `pkg_${i}_${p.retailer}_${p.description}`.replace(/\s+/g,'_');
 
     return `<div class="card" style="--status-color:${color};animation-delay:${i*0.04}s">
       <div class="card-top">
