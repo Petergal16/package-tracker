@@ -291,12 +291,12 @@
     {
       "email_id": "c965d9a003ebfc888f51494c36b5759f",
       "retailer": "UPS",
-      "description": "UPS order",
+      "description": "UPS shipment",
       "carrier": "UPS",
       "tracking_number": "1ZWF41810399895922",
-      "tracking_url": "https://www.ups.com/deliverychange?loc=en_US&productId=AD&clientId=NOT&WT.z_eCTAid=ct1_eml_ChgDel__ct1_eml_tra_eml_autoship&WT.z_edatesent=03272026&eqp=dmF1bHQ6djQ0OmhPZG9qVVZKZTJQSlAvUlpLOHU3UWRWRHF4eWtYUFpBYlZLbWdVZllVMytLN0RVQkM2UHV4cHUzOC9NUHMyRnZ6ZXNldmt5WE1hWGxHclVjeFFPTmQya1JMTU8rYklJQVNQRFVBVTUxWGE4OGo1U1VlNU0vY3BuNHlDVjgwYU5qOUd5dUs1dGM4SldlV01Ma2dJeDVvUDRMaWdsY3dhRmwzSHkvNWpkUXJwSVgrZ0VHemZud21reXBRV1ZVNC84b1lSY3NSaXowM04rOWMreTNDemxyOGZLcGMrY281UFU9",
+      "tracking_url": "https://www.ups.com",
       "status": "shipped",
-      "status_detail": "Your Package Has Shipped",
+      "status_detail": "Package has shipped",
       "estimated_delivery": null,
       "delivered_at": null,
       "order_number": null,
@@ -325,5 +325,5 @@
       "last_updated": "2024-12-19"
     }
   ],
-  "last_updated": "2026-03-28T02:11:58.385392+00:00"
+  "last_updated": "2026-03-28T14:28:55.353569+00:00"
 }
