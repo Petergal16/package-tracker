@@ -291,12 +291,12 @@
     {
       "email_id": "c965d9a003ebfc888f51494c36b5759f",
       "retailer": "UPS",
-      "description": "UPS order",
+      "description": "UPS package",
       "carrier": "UPS",
       "tracking_number": "1ZWF41810399895922",
       "tracking_url": "https://www.ups.com",
       "status": "shipped",
-      "status_detail": "Your Package Has Shipped",
+      "status_detail": "Package has shipped",
       "estimated_delivery": null,
       "delivered_at": null,
       "order_number": null,
@@ -325,5 +325,5 @@
       "last_updated": "2024-12-19"
     }
   ],
-  "last_updated": "2026-03-29T02:31:42.070160+00:00"
+  "last_updated": "2026-03-29T14:31:04.314273+00:00"
 }
