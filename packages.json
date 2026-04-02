@@ -91,21 +91,21 @@
       "last_updated": "2026-03-27"
     },
     {
-      "email_id": "db545fd602ec38d884032df12c8bc046",
+      "email_id": "4cdb42d1dd62541439640946b546548e",
       "retailer": "UPS",
-      "description": "UPS delivery",
+      "description": "UPS order",
       "carrier": "UPS",
       "tracking_number": "1ZWF41810399895922",
       "tracking_url": "https://www.ups.com",
       "status": "out_for_delivery",
-      "status_detail": "Package Scheduled for Delivery Tomorrow",
+      "status_detail": "Your Package Is Coming Today",
       "estimated_delivery": "2026-04-02",
       "delivered_at": null,
       "order_number": null,
       "item_cost": null,
       "order_total": null,
       "currency": null,
-      "received_at": "2026-04-01T12:50:40-04:00",
+      "received_at": "2026-04-02T10:24:52-04:00",
       "last_updated": "2026-04-02"
     },
     {
@@ -325,5 +325,5 @@
       "last_updated": "2024-12-19"
     }
   ],
-  "last_updated": "2026-04-02T02:26:10.632905+00:00"
+  "last_updated": "2026-04-02T14:52:48.109531+00:00"
 }
