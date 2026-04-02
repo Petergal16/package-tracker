@@ -91,6 +91,24 @@
       "last_updated": "2026-03-27"
     },
     {
+      "email_id": "db545fd602ec38d884032df12c8bc046",
+      "retailer": "UPS",
+      "description": "UPS delivery",
+      "carrier": "UPS",
+      "tracking_number": "1ZWF41810399895922",
+      "tracking_url": "https://www.ups.com",
+      "status": "out_for_delivery",
+      "status_detail": "Package Scheduled for Delivery Tomorrow",
+      "estimated_delivery": "2026-04-02",
+      "delivered_at": null,
+      "order_number": null,
+      "item_cost": null,
+      "order_total": null,
+      "currency": null,
+      "received_at": "2026-04-01T12:50:40-04:00",
+      "last_updated": "2026-04-02"
+    },
+    {
       "email_id": "54bf2a99f0aac7bd56c0b3ef78361d5a",
       "retailer": "Minnesota Zoo",
       "description": "Gift Membership: Individual Level",
@@ -289,24 +307,6 @@
       "last_updated": "2024-12-19"
     },
     {
-      "email_id": "c965d9a003ebfc888f51494c36b5759f",
-      "retailer": "UPS",
-      "description": "UPS package",
-      "carrier": "UPS",
-      "tracking_number": "1ZWF41810399895922",
-      "tracking_url": "https://www.ups.com",
-      "status": "shipped",
-      "status_detail": "Package has shipped",
-      "estimated_delivery": null,
-      "delivered_at": null,
-      "order_number": null,
-      "item_cost": null,
-      "order_total": null,
-      "currency": null,
-      "received_at": "2026-03-27T21:50:22-04:00",
-      "last_updated": "2026-03-29"
-    },
-    {
       "email_id": "bb77f224fbc177a221a7f9a9bb82bb9e",
       "retailer": "B&H Photo",
       "description": "Seagate 16TB IronWolf Pro NAS HDD",
@@ -325,5 +325,5 @@
       "last_updated": "2024-12-19"
     }
   ],
-  "last_updated": "2026-03-29T14:31:04.314273+00:00"
+  "last_updated": "2026-04-02T02:26:10.632905+00:00"
 }
