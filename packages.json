@@ -109,6 +109,24 @@
       "last_updated": "2026-04-02"
     },
     {
+      "email_id": "848183bae5ded87560423896d1de0f61",
+      "retailer": "B&H Photo",
+      "description": "MV7+-K Podcast XLR/USB Microphone Bundle with Gator Desktop Stand (Black)",
+      "carrier": "FedEx",
+      "tracking_number": "520353238956",
+      "tracking_url": "https://www.bhphotovideo.com/find/trackPackage.jsp?orderRef=93fbfee2c54a23071afa750b378846f29daf01eb89190b013ab20094bb40bbc9",
+      "status": "shipped",
+      "status_detail": "Shipped",
+      "estimated_delivery": "2026-04-13",
+      "delivered_at": null,
+      "order_number": "1128268991",
+      "item_cost": null,
+      "order_total": null,
+      "currency": null,
+      "received_at": "2026-04-10T15:55:54+00:00",
+      "last_updated": "2026-04-11"
+    },
+    {
       "email_id": "54bf2a99f0aac7bd56c0b3ef78361d5a",
       "retailer": "Minnesota Zoo",
       "description": "Gift Membership: Individual Level",
@@ -325,5 +343,5 @@
       "last_updated": "2024-12-19"
     }
   ],
-  "last_updated": "2026-04-04T14:31:27.881104+00:00"
+  "last_updated": "2026-04-11T02:23:05.008754+00:00"
 }
