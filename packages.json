@@ -116,7 +116,7 @@
       "tracking_number": "520353238956",
       "tracking_url": "https://www.bhphotovideo.com/find/trackPackage.jsp?orderRef=93fbfee2c54a23071afa750b378846f29daf01eb89190b013ab20094bb40bbc9",
       "status": "shipped",
-      "status_detail": "Shipped",
+      "status_detail": "Package shipped",
       "estimated_delivery": "2026-04-13",
       "delivered_at": null,
       "order_number": "1128268991",
@@ -343,5 +343,5 @@
       "last_updated": "2024-12-19"
     }
   ],
-  "last_updated": "2026-04-13T02:44:48.278427+00:00"
+  "last_updated": "2026-04-13T15:13:58.423151+00:00"
 }
