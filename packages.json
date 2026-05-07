@@ -325,6 +325,24 @@
       "last_updated": "2024-12-19"
     },
     {
+      "email_id": "23b62769473460b485fc3eda81b2aed7",
+      "retailer": "Walmart.com",
+      "description": "OOU White Bear Kitchen",
+      "carrier": "Other",
+      "tracking_number": "1LSCXLNA045669018",
+      "tracking_url": "https://w-mt.co/g/rptrcks/comm-smart-app/services/tracking/clickTracker?redirectTo=US6P3D9N0sjcFvGtRkPKQyxXEs1yrYcnTSLc4V%2BZCpkGPNLuUNhU8pVrLguO%2FALZFI%2FLPwnROeNeKYXQyS6W3XDcg3p52okWB0Bvn%2FHFpfDqBRIyufXai6jL%2BW%2F6SfA7KOM5sY1b%2By0KmKPexDG6KavlG7qthyIAGJrhrd8kUnIhDpNcszH4n5VPuP0E2TPOUFoSpV%2FyRawbZSWn5YaWyJwLOZVH%2BhKAwF3h05X7SVd7t4plXzOIlioPbnEmXy4wceMz4k7wAxyfSTrifi8nEpqAwe5fKlu88WmWK2q9yI4PuSw%2FOcCoGDS8QFPJS%2Fufv3cRs7oB81OiZEhW62xsealFp6BceBifmaDGmxbA81i0TbZmaXPTvniwrp45dY6auM1QhpIzpX8gqQ1DAdsaHh18%2F6Tbztytmkg1EIa%2BQKmW2ZC7YHwcti6NV1pv8uIKu%2FXfN9Hkt%2Fg2AAw44SLaT0nbqz9%2FCBX33Khv4T05JN8ufJ%2FbuCnTVb8d210rKXxgWfi6PZQdLL2AcmZ8t5ywTjlEvvWGG5QHBi03TNeB56DOlzZ19A8TwAvWev8Mb8HM%2BQX0fN4XwXdjUjC4egB2VufuGJVRGmjKr4tpDtaAl%2FuAhu3pRqCJC196G3XcQs5mIY5dzr%2BSLc87xVUrtQN1UbV0eUsEwalTNCPCNv%2FWyuvktTQl8cZmRpOl%2Ftn9su2P5Ak9BdplLPxphhJ8qeDdOZ0UFNd4lXBaLFrBHQzjiIRteOdv9xJXxK7kIg7mSrON2rPRWJGnitfaR74V6hu4rx2F8MgsxT8ojzOouzMM1Hx9tIexHlu4ZEb9mdawFh5TNUVcZaNyUJFfqKDdyM3wN0G3pgvnPskrt8eY8QXarKc%3D&meta=xRLE%2B9EDZGnSixtunMR654TzAlp7foUXveRuzgWT9%2BSKYzGHxqCNipqzAOhYcwsWkUD5AkXqflXYglG4nqdzr8YTFkbEpQeHHHHRlYcDSzFcaI9P%2FINuOod8%2BZPy1gK7bsg1ikk1XoEYDc5O2CCU2KpgFVhOI%2BzUHpFFVbscTL%2FWwMwXyfEulJM9LodNPw5xjwCFdsuTSGFH17pSVn293A%3D%3D&iv=JedHY3dJeFQbGfA8WoUf2Q%3D%3D",
+      "status": "shipped",
+      "status_detail": "Your package shipped",
+      "estimated_delivery": null,
+      "delivered_at": null,
+      "order_number": null,
+      "item_cost": null,
+      "order_total": null,
+      "currency": null,
+      "received_at": "2026-05-07T00:59:05+00:00",
+      "last_updated": "2026-05-07"
+    },
+    {
       "email_id": "bb77f224fbc177a221a7f9a9bb82bb9e",
       "retailer": "B&H Photo",
       "description": "Seagate 16TB IronWolf Pro NAS HDD",
@@ -343,5 +361,5 @@
       "last_updated": "2024-12-19"
     }
   ],
-  "last_updated": "2026-04-13T15:13:58.423151+00:00"
+  "last_updated": "2026-05-07T02:54:04.302715+00:00"
 }
