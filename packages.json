@@ -345,7 +345,7 @@
     {
       "email_id": "8ee49960f0924d378b9efce2b1ec2a83",
       "retailer": "Walmart.com",
-      "description": "Quaker Quick 1 Minute and 2 other items",
+      "description": "Quaker, Quick 1 Minute",
       "carrier": "Other",
       "tracking_number": "1LSCXLNA045966155",
       "tracking_url": "https://w-mt.co/g/rptrcks/comm-smart-app/services/tracking/clickTracker?redirectTo=csQplksKbafIs34cHTa%2FUTQ7tyBdtuhvfUQZWGRwQpxyqYb1gSPI9f2zopT1VW6o1ARdjqBltuRVUmCxAvhRcBpAcW95nhAAxVq4yrsj7alvnPiYc0Z%2B2Eo6GoojNHHaKr07nNFFJoZmxxgKK%2BeLWOTdm6DgPszvERhAZUw7muIdPbBC5qQMEK1W6mLPg5FIDvxeWX%2BRDQcDiyaxZhsipqjZvt4%2FAYPn5dT4KPBxa8lFssisemNLJNkeJdhsvcfhMy1ZR4N1DIjcbL9A6af897p%2B3XeLMXB85EGjNKueB0ZWjXTe9MBMmlejYdw%2BR800ZPtQKvqC2lRuAn61m1gl%2FiqYtdXGGZKm2F1Z68fzUpMvJoToPs4zsnWCrQPzl7E55zJ2%2F5H7do1nO%2FTsBMYZJMD0SMAvF5Lnib4PNEWiOIQ7qEABPKZ9LtX5kVqXAOdKHoYGhRuf%2BvdIY739XFZGdJP0kgvrgvVpef%2Bg5WjJgFAgnH%2BKNbUmmIDSpWLxIuIQ9X1BuudMq7fS1zMiWjFI9ap9fDOxd3kgM99zP6lTwvlNT6WwHZjFETKPbr1yX5dnAkhn8Z6HXkKiRVzMWXofGV6W%2FfPewJJC6pEb%2Fajqa%2F2cuGKUJw5jE7ElZiprOg0Yt1EXU%2FISF37dUpllILs6ZXl6Eipb%2F4EZgZ1r7t601gFtkkzx%2F4WenXtXoRz%2FpPPxNK85%2FB1ROGdUPeVQVUOgeUqKYTyaCOJQyJuOjIbbmwykgNBvBe%2B8UNoz8PDSH1iUjDOU2TRwr4EOt122euMOCcElKw4qIaUzhRXI2HXKBLfCnD3yGzuyOXEyzlK7Qkc5KWERsq79ysMELx%2Fsqb%2FI9EqGPYTbYHfh3wtBwECaNMo%3D&meta=6pfKi2aJ9JRf0FrdUEV3qm0EeyCnazoNHED2uGqrenGQVPtLerGOwb40AQiSA9YlxlJT%2Fv8qWjhqJvTH0wRfriYywIILDPZ%2BQv%2F3yoEfMjrOWY6zjwpzPjpdnB49rbzYZ85Okxi3%2BoO%2F2TtyxDUNWOoVdUrowzIjFTb5oMMvDY%2F3UFtKNbTjfJEbSx8NG6RF1ZwwZY2NhUdVOmUj6OJ%2B%2FQ%3D%3D&iv=MwJ5MB47tkCRNIcMisLrGQ%3D%3D",
@@ -358,7 +358,7 @@
       "order_total": null,
       "currency": null,
       "received_at": "2026-05-09T04:16:00+00:00",
-      "last_updated": "2026-05-10"
+      "last_updated": "2026-05-11"
     },
     {
       "email_id": "bb77f224fbc177a221a7f9a9bb82bb9e",
@@ -379,5 +379,5 @@
       "last_updated": "2024-12-19"
     }
   ],
-  "last_updated": "2026-05-10T14:49:00.513101+00:00"
+  "last_updated": "2026-05-11T03:35:03.889369+00:00"
 }
