@@ -361,22 +361,22 @@
       "last_updated": "2026-05-12"
     },
     {
-      "email_id": "86471e6680503c77a06c12545ca5f10c",
+      "email_id": "bb4dd8f8a9c299e709f5fa63fb9cf355",
       "retailer": "GRAYL",
       "description": "GRAYL order",
       "carrier": "Unknown",
       "tracking_number": "is",
       "tracking_url": "https://grayl.com/apps/tracking/",
-      "status": "shipped",
-      "status_detail": "Order received and accepted by shipping carrier",
+      "status": "out_for_delivery",
+      "status_detail": "Out for delivery",
       "estimated_delivery": null,
       "delivered_at": null,
       "order_number": null,
       "item_cost": null,
       "order_total": null,
       "currency": null,
-      "received_at": "2026-05-11T18:36:36+00:00",
-      "last_updated": "2026-05-12"
+      "received_at": "2026-05-13T10:17:00+00:00",
+      "last_updated": "2026-05-13"
     },
     {
       "email_id": "bb77f224fbc177a221a7f9a9bb82bb9e",
@@ -395,7 +395,25 @@
       "currency": null,
       "received_at": "2026-03-17T18:34:05-04:00",
       "last_updated": "2024-12-19"
+    },
+    {
+      "email_id": "c8431d701dc55fec79d59d3789e990f9",
+      "retailer": "Liquid I.V.",
+      "description": "BYOB - SF - Mango Pineapple, BYOB - SF - Strawberry Watermelon",
+      "carrier": "Other",
+      "tracking_number": "1LSCYG50062TQ5L",
+      "tracking_url": "https://track.shiptracker.io/1LSCYG50062TQ5L",
+      "status": "delivered",
+      "status_detail": "Order has arrived",
+      "estimated_delivery": null,
+      "delivered_at": "2026-05-13T15:58:07+00:00",
+      "order_number": "7295986",
+      "item_cost": null,
+      "order_total": null,
+      "currency": "USD",
+      "received_at": "2026-05-13T15:58:07+00:00",
+      "last_updated": "2026-05-13"
     }
   ],
-  "last_updated": "2026-05-12T03:22:11.975697+00:00"
+  "last_updated": "2026-05-13T16:15:29.252767+00:00"
 }
