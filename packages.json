@@ -380,8 +380,8 @@
     },
     {
       "email_id": "8d1f951a10f3ff15f7b78b24b7851c4a",
-      "retailer": "On Running",
-      "description": "On 96",
+      "retailer": "On",
+      "description": "On order",
       "carrier": "Unknown",
       "tracking_number": "526642258269",
       "tracking_url": "http://url3317.on.com/ls/click?upn=u001.Pve8x-2F8Xl6E0Yo1p1NT-2FI2foKMCxAX3K6U7Ax7DFzOZoN54OyVIiS8PQgT2jUBNUO6VrWCNPuqEcMYvUb4YMlo2F75p57-2BeWUbBfvPrRWx5E4EU3TAOFtpuBg7eTtx9utx5ZgV0dOrnCmEodYh7O1A-3D-3DLRvW_pRzSp74FFqMyvrC-2Box9NUjL-2FmnQkPECoSPXKE0IqjgocdS-2BTW-2BqwmDDY2raEpoqylUGwbkn0R85jsYBLvZzeE9aAM2DaKKamb5-2FOh0NDF-2Bow5PSgP7sL7uhpmXCKtvJH2p43t4JwNbYZOIsSD-2FW-2Bizv4Z9JBgZLXTXcOYZRyCNIThFaYW9x-2Bl8Eu2awu4LeDEg00BAE-2BgFjemex9NJapsA-3D-3D",
@@ -394,7 +394,7 @@
       "order_total": null,
       "currency": null,
       "received_at": "2026-05-22T03:23:28+00:00",
-      "last_updated": "2026-05-22"
+      "last_updated": "2026-05-23"
     },
     {
       "email_id": "bb77f224fbc177a221a7f9a9bb82bb9e",
@@ -433,5 +433,5 @@
       "last_updated": "2026-05-13"
     }
   ],
-  "last_updated": "2026-05-22T16:21:46.656913+00:00"
+  "last_updated": "2026-05-23T02:57:59.658364+00:00"
 }
