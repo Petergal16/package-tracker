@@ -127,6 +127,24 @@
       "last_updated": "2026-04-13"
     },
     {
+      "email_id": "f7aa1d001366ce7c2df6d32d3f0b9803",
+      "retailer": "On",
+      "description": "THE ROGER Centre Court White | Gum",
+      "carrier": "UPS",
+      "tracking_number": "526642258269",
+      "tracking_url": "https://cta.narvar.com/f/a/l-RCWG0HIhuD2pUaOZYH4g~~/AAG0DBA~/jY_F1DZCUAZBXfzOM5stAmk2wOgdydBsZtgFntPQl4wmZFEgsEN4n3yGvjCLyldq0O7sqg-eKJ9NqtojgdZvSEZVkQy2pnoxxlAbF1OCKUSv7NKonyPFWzschwxGnWqtpH0uBs1AStiWKY_PCxZaInyBcTr-pKg43xtbTk8AqLZBQIg_hE8E60Z_gqGoBJYEfbgyOdXsjRtKsQFMWawiKAm3fdWqYthKo6dPu2T4LkVYITNMrYSsRn4IS8rxd5RYPPKkydmFytTrQSDy4pNIJw~~",
+      "status": "out_for_delivery",
+      "status_detail": "Your package will arrive soon",
+      "estimated_delivery": "2026-05-26",
+      "delivered_at": null,
+      "order_number": "ON764351255809",
+      "item_cost": 140.0,
+      "order_total": null,
+      "currency": "USD",
+      "received_at": "2026-05-25T13:05:41+00:00",
+      "last_updated": "2026-05-25"
+    },
+    {
       "email_id": "f10da37c539e20239915e52b14a45f0d",
       "retailer": "REI Co-op",
       "description": "FRONTIERSMAN MAX 7.9 oz. Bear Spray & Mountain Lion Spray with Belt Holster",
@@ -433,24 +451,6 @@
       "last_updated": "2026-05-13"
     },
     {
-      "email_id": "8d1f951a10f3ff15f7b78b24b7851c4a",
-      "retailer": "On",
-      "description": "On order",
-      "carrier": "Unknown",
-      "tracking_number": "526642258269",
-      "tracking_url": "http://url3317.on.com/ls/click?upn=u001.Pve8x-2F8Xl6E0Yo1p1NT-2FI2foKMCxAX3K6U7Ax7DFzOZoN54OyVIiS8PQgT2jUBNUO6VrWCNPuqEcMYvUb4YMlo2F75p57-2BeWUbBfvPrRWx5E4EU3TAOFtpuBg7eTtx9utx5ZgV0dOrnCmEodYh7O1A-3D-3DLRvW_pRzSp74FFqMyvrC-2Box9NUjL-2FmnQkPECoSPXKE0IqjgocdS-2BTW-2BqwmDDY2raEpoqylUGwbkn0R85jsYBLvZzeE9aAM2DaKKamb5-2FOh0NDF-2Bow5PSgP7sL7uhpmXCKtvJH2p43t4JwNbYZOIsSD-2FW-2Bizv4Z9JBgZLXTXcOYZRyCNIThFaYW9x-2Bl8Eu2awu4LeDEg00BAE-2BgFjemex9NJapsA-3D-3D",
-      "status": "shipped",
-      "status_detail": "Order is on its way",
-      "estimated_delivery": null,
-      "delivered_at": null,
-      "order_number": "ON764351255809",
-      "item_cost": null,
-      "order_total": null,
-      "currency": null,
-      "received_at": "2026-05-22T03:23:28+00:00",
-      "last_updated": "2026-05-23"
-    },
-    {
       "email_id": "bb77f224fbc177a221a7f9a9bb82bb9e",
       "retailer": "B&H Photo",
       "description": "Seagate 16TB IronWolf Pro NAS HDD",
@@ -487,5 +487,5 @@
       "last_updated": "2026-05-13"
     }
   ],
-  "last_updated": "2026-05-25T03:53:49.324726+00:00"
+  "last_updated": "2026-05-25T16:20:54.956802+00:00"
 }
