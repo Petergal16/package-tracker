@@ -128,7 +128,7 @@
     },
     {
       "email_id": "f7aa1d001366ce7c2df6d32d3f0b9803",
-      "retailer": "On",
+      "retailer": "On Team",
       "description": "THE ROGER Centre Court White | Gum",
       "carrier": "UPS",
       "tracking_number": "526642258269",
@@ -142,7 +142,7 @@
       "order_total": null,
       "currency": "USD",
       "received_at": "2026-05-25T13:05:41+00:00",
-      "last_updated": "2026-05-25"
+      "last_updated": "2026-05-26"
     },
     {
       "email_id": "f10da37c539e20239915e52b14a45f0d",
@@ -160,7 +160,7 @@
       "order_total": 43.21,
       "currency": "USD",
       "received_at": "2026-05-24T16:44:45+00:00",
-      "last_updated": "2026-05-25"
+      "last_updated": "2026-05-26"
     },
     {
       "email_id": "75afc497072c30310c6971a917c2180e",
@@ -178,7 +178,7 @@
       "order_total": 43.21,
       "currency": "USD",
       "received_at": "2026-05-24T16:50:34+00:00",
-      "last_updated": "2026-05-25"
+      "last_updated": "2026-05-26"
     },
     {
       "email_id": "43fc610885de2a405a52796b14500c9a",
@@ -196,7 +196,7 @@
       "order_total": null,
       "currency": "USD",
       "received_at": "2026-05-24T21:50:40+00:00",
-      "last_updated": "2026-05-25"
+      "last_updated": "2026-05-26"
     },
     {
       "email_id": "54bf2a99f0aac7bd56c0b3ef78361d5a",
@@ -487,5 +487,5 @@
       "last_updated": "2026-05-13"
     }
   ],
-  "last_updated": "2026-05-25T16:20:54.956802+00:00"
+  "last_updated": "2026-05-26T03:36:20.373524+00:00"
 }
