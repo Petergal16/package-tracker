@@ -188,7 +188,7 @@
       "tracking_number": null,
       "tracking_url": "https://notices.rei.com/pub/cc?_ri_=X0Gzc2X%3DBQjkPkSUWQG2RzcqzeGAIzczfzc5ps9Oczf5UzaidrcaOKL1LoYuBzc4o7zfICzaMWlkg9n8VXtpKX%3DSURCABYU&_ei_=EZ_YWiBkdBKG-5DufeVBmfJnhDEPjKXTWwTsY6-BTRT340Pl-wD8MRydoOmSDH1rFjqDrnB2wa42MXfe2B0Wt7Koj7nN-HPH4l0v1StGnnBK44hj-9eMU03hJ95uqLBWL3dTNeHEewhPVwmxq1K69D3-15-7G_r1XJj39bAMv2EmGWT1aDxeSqkqQjCqig--7UNHn0Bb-aYDtXeuKDt-UOFDXAsY3TPfbh2RSiP-J54y45EjI2R1nFWK-fIQ4pspZRT952LTmJnYfxKEKbk1F67D1HIDkOy59ZvhCMRswoWHXbj8TN6j8J9FjZgd1iDLI3zIKwlJZs2LOGxFY5LLj9rHOcHK_w.&_di_=9s0c1tj1e54hk36h7osbepldoodsgp98m8c50al8q7i3ovs8ghcg",
       "status": "ordered",
-      "status_detail": "We're preparing your 3 items",
+      "status_detail": "Order confirmed, preparing 3 items",
       "estimated_delivery": "2026-05-30",
       "delivered_at": null,
       "order_number": "A400662986",
@@ -487,5 +487,5 @@
       "last_updated": "2026-05-13"
     }
   ],
-  "last_updated": "2026-05-27T03:53:26.476113+00:00"
+  "last_updated": "2026-05-27T16:58:59.524256+00:00"
 }
