@@ -196,7 +196,7 @@
       "order_total": null,
       "currency": "USD",
       "received_at": "2026-05-24T21:50:40+00:00",
-      "last_updated": "2026-05-28"
+      "last_updated": "2026-05-29"
     },
     {
       "email_id": "54bf2a99f0aac7bd56c0b3ef78361d5a",
@@ -451,6 +451,24 @@
       "last_updated": "2026-05-13"
     },
     {
+      "email_id": "6523ce6dc311abeec528831b18ae4384",
+      "retailer": "Mayo Clinic",
+      "description": "Prescription",
+      "carrier": "USPS",
+      "tracking_number": "9400136207663276700102",
+      "tracking_url": "https://tools.usps.com/go/TrackConfirmAction?tLabels=9400136207663276700102",
+      "status": "shipped",
+      "status_detail": "You have a prescription that has been shipped",
+      "estimated_delivery": null,
+      "delivered_at": null,
+      "order_number": null,
+      "item_cost": null,
+      "order_total": null,
+      "currency": null,
+      "received_at": "2026-05-28T14:12:58-05:00",
+      "last_updated": "2026-05-29"
+    },
+    {
       "email_id": "bb77f224fbc177a221a7f9a9bb82bb9e",
       "retailer": "B&H Photo",
       "description": "Seagate 16TB IronWolf Pro NAS HDD",
@@ -487,5 +505,5 @@
       "last_updated": "2026-05-13"
     }
   ],
-  "last_updated": "2026-05-28T17:33:07.736456+00:00"
+  "last_updated": "2026-05-29T03:39:30.107259+00:00"
 }
