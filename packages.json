@@ -181,24 +181,6 @@
       "last_updated": "2026-05-26"
     },
     {
-      "email_id": "43fc610885de2a405a52796b14500c9a",
-      "retailer": "REI Co-op",
-      "description": "Black Diamond Momentum Harness - Women's, Smartwool Classic All-Season Merino Long-Sleeve Base Layer Top - Women's",
-      "carrier": "Unknown",
-      "tracking_number": null,
-      "tracking_url": "https://notices.rei.com/pub/cc?_ri_=X0Gzc2X%3DBQjkPkSUWQG2RzcqzeGAIzczfzc5ps9Oczf5UzaidrcaOKL1LoYuBzc4o7zfICzaMWlkg9n8VXtpKX%3DSURCABYU&_ei_=EZ_YWiBkdBKG-5DufeVBmfJnhDEPjKXTWwTsY6-BTRT340Pl-wD8MRydoOmSDH1rFjqDrnB2wa42MXfe2B0Wt7Koj7nN-HPH4l0v1StGnnBK44hj-9eMU03hJ95uqLBWL3dTNeHEewhPVwmxq1K69D3-15-7G_r1XJj39bAMv2EmGWT1aDxeSqkqQjCqig--7UNHn0Bb-aYDtXeuKDt-UOFDXAsY3TPfbh2RSiP-J54y45EjI2R1nFWK-fIQ4pspZRT952LTmJnYfxKEKbk1F67D1HIDkOy59ZvhCMRswoWHXbj8TN6j8J9FjZgd1iDLI3zIKwlJZs2LOGxFY5LLj9rHOcHK_w.&_di_=9s0c1tj1e54hk36h7osbepldoodsgp98m8c50al8q7i3ovs8ghcg",
-      "status": "ordered",
-      "status_detail": "Preparing 3 items for shipment",
-      "estimated_delivery": "2026-05-30",
-      "delivered_at": null,
-      "order_number": "A400662986",
-      "item_cost": null,
-      "order_total": null,
-      "currency": "USD",
-      "received_at": "2026-05-24T21:50:40+00:00",
-      "last_updated": "2026-05-30"
-    },
-    {
       "email_id": "54bf2a99f0aac7bd56c0b3ef78361d5a",
       "retailer": "Minnesota Zoo",
       "description": "Gift Membership: Individual Level",
@@ -469,6 +451,24 @@
       "last_updated": "2026-05-30"
     },
     {
+      "email_id": "1d824444a7f2f3ed989b2af6603dc3af",
+      "retailer": "REI Co-op",
+      "description": "Smartwool Classic All-Season Merino Long-Sleeve Base Layer Top - Women's",
+      "carrier": "USPS",
+      "tracking_number": "9200199999960660150804",
+      "tracking_url": "https://notices.rei.com/pub/cc?_ri_=X0Gzc2X%3DBQjkPkSUWQG2zczazbIknHzb7MynsmqXfaNsOWTY48zcjbJKdO8Ad6NbRb18IoMYpOmVXtpKX%3DSURYTCSR&_ei_=E-FBWJqUWaLLkAGD46ZqJrV53WNwSIyLWWnV3xr8oZF10Pj4tTJmnU41z9rx5bb3h1c6dx7jJYc8bEWv-27wEcrQ4Xgdi7-yLm79hzLnuI8u_FDofKI8Rg2FhipTk-RT1mqPpvGPsbwWTgmweQrV5Fc_r8HTlmhubryDJ6YPxUnmzI4-Xu6xsYDlu2-BK6tLr74U0EA1lbOI0u0vDaX_KBO_JwCBBv3j9SmHRk5mGdzjX0C9ZwUEnbMHPb7iQtN5amnhj74v2SsmBg8KGMZRgm2u6lZSJnoV9e5g2IlJMjZcGmIIDIi7y5wJV_UHd3oGMgyUO6NY2xmRbKrAK76OVVXPOQAOWg.&_di_=7os78964csoclkmjuggvgvvcf83n14v37dmmsk4ne16ibf3jc2a0",
+      "status": "delivered",
+      "status_detail": "Package delivered",
+      "estimated_delivery": null,
+      "delivered_at": "2026-05-29T09:13:00+00:00",
+      "order_number": "A400662986",
+      "item_cost": null,
+      "order_total": null,
+      "currency": null,
+      "received_at": "2026-05-30T12:45:30+00:00",
+      "last_updated": "2026-05-30"
+    },
+    {
       "email_id": "bb77f224fbc177a221a7f9a9bb82bb9e",
       "retailer": "B&H Photo",
       "description": "Seagate 16TB IronWolf Pro NAS HDD",
@@ -505,5 +505,5 @@
       "last_updated": "2026-05-13"
     }
   ],
-  "last_updated": "2026-05-30T03:28:25.513695+00:00"
+  "last_updated": "2026-05-30T15:03:19.976654+00:00"
 }
