@@ -196,7 +196,7 @@
       "order_total": null,
       "currency": "USD",
       "received_at": "2026-05-24T21:50:40+00:00",
-      "last_updated": "2026-05-29"
+      "last_updated": "2026-05-30"
     },
     {
       "email_id": "54bf2a99f0aac7bd56c0b3ef78361d5a",
@@ -458,7 +458,7 @@
       "tracking_number": "9400136207663276700102",
       "tracking_url": "https://tools.usps.com/go/TrackConfirmAction?tLabels=9400136207663276700102",
       "status": "shipped",
-      "status_detail": "Prescription shipped",
+      "status_detail": "Prescription has been shipped",
       "estimated_delivery": null,
       "delivered_at": null,
       "order_number": null,
@@ -466,7 +466,7 @@
       "order_total": null,
       "currency": null,
       "received_at": "2026-05-28T14:12:58-05:00",
-      "last_updated": "2026-05-29"
+      "last_updated": "2026-05-30"
     },
     {
       "email_id": "bb77f224fbc177a221a7f9a9bb82bb9e",
@@ -505,5 +505,5 @@
       "last_updated": "2026-05-13"
     }
   ],
-  "last_updated": "2026-05-29T17:31:55.595109+00:00"
+  "last_updated": "2026-05-30T03:28:25.513695+00:00"
 }
