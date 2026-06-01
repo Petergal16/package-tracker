@@ -181,6 +181,24 @@
       "last_updated": "2026-05-26"
     },
     {
+      "email_id": "6b9fc4683716d461337ff7e109ed3128",
+      "retailer": "REI Co-op",
+      "description": "America the Beautiful Pass - Resident - 2026",
+      "carrier": "Unknown",
+      "tracking_number": null,
+      "tracking_url": "https://notices.rei.com/pub/cc?_ri_=X0Gzc2X%3DBQjkPkSUWQG2RzcqzeGAIzczfzc5ps9Oczf5UzaizctlsB1A13azcYpKogILzatRMWlkg9n8VXtpKX%3DSURCABYU&_ei_=EZ_YWiBkdBKG-5DufeVBmfJnhDEPjKXTWwTsY6-BTRT340Pl-wD8MRydoOmSDH1rFjqDrnB2wa42MXfe2B0Wt7Koj7nN-HPH4l0v1StGnnBK44hj-9eMU03hJ95uqLBWL3dTNeHEewhPVwmxq1K69D3-15-7G_r1XJj39bAMv2EmGWT1aDxeSqkqQjCqig--7MJ82AXseQjWQTI0Gg_Et7nULw8D2FvgR9Lv2gd8m7WqlBH1NBdpL02V5JhUbyWst7DESSGIERGZzC0FKpm26M7AidQIfmqzHdtg9oH_1wYHca-J1s5qUdRaII3DkWUnuFBxj1JhQBqYh34MDlFikzkt0ST-w0.&_di_=1gujdukt0l61edag9h097vj4fe4dap8i2s3lsru3lr9j4p5vlsv0",
+      "status": "ordered",
+      "status_detail": "We're preparing your item",
+      "estimated_delivery": "2026-06-05",
+      "delivered_at": null,
+      "order_number": "A400955099",
+      "item_cost": 79.99,
+      "order_total": 79.99,
+      "currency": "USD",
+      "received_at": "2026-05-31T21:58:15+00:00",
+      "last_updated": "2026-06-01"
+    },
+    {
       "email_id": "54bf2a99f0aac7bd56c0b3ef78361d5a",
       "retailer": "Minnesota Zoo",
       "description": "Gift Membership: Individual Level",
@@ -505,5 +523,5 @@
       "last_updated": "2026-05-13"
     }
   ],
-  "last_updated": "2026-05-31T15:16:06.968684+00:00"
+  "last_updated": "2026-06-01T04:07:55.955869+00:00"
 }
