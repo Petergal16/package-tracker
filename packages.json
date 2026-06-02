@@ -194,7 +194,7 @@
       "order_number": "153767",
       "item_cost": null,
       "order_total": null,
-      "currency": "USD",
+      "currency": null,
       "received_at": "2026-06-01T17:39:40-07:00",
       "last_updated": "2026-06-02"
     },
@@ -212,7 +212,7 @@
       "order_number": "A400955099",
       "item_cost": null,
       "order_total": null,
-      "currency": "USD",
+      "currency": null,
       "received_at": "2026-06-02T00:13:25+00:00",
       "last_updated": "2026-06-02"
     },
@@ -541,5 +541,5 @@
       "last_updated": "2026-05-13"
     }
   ],
-  "last_updated": "2026-06-02T04:01:48.543120+00:00"
+  "last_updated": "2026-06-02T18:03:10.126555+00:00"
 }
