@@ -181,22 +181,40 @@
       "last_updated": "2026-05-26"
     },
     {
-      "email_id": "6b9fc4683716d461337ff7e109ed3128",
+      "email_id": "edfc17ee41edb136ae1a8e2fa24447b8",
+      "retailer": "HeatShield",
+      "description": "HeatShield order",
+      "carrier": "UPS",
+      "tracking_number": "1Z8939570393090327",
+      "tracking_url": "https://wwwapps.ups.com/WebTracking/processRequest?InquiryNumber1=1Z8939570393090327&track.x=0&track.y=0%22#",
+      "status": "shipped",
+      "status_detail": "Order has shipped",
+      "estimated_delivery": "2026-06-04",
+      "delivered_at": null,
+      "order_number": "153767",
+      "item_cost": null,
+      "order_total": null,
+      "currency": "USD",
+      "received_at": "2026-06-01T17:39:40-07:00",
+      "last_updated": "2026-06-02"
+    },
+    {
+      "email_id": "d429462d37dbb6eda3cdd1025c8cd479",
       "retailer": "REI Co-op",
       "description": "America the Beautiful Pass - Resident - 2026",
-      "carrier": "Unknown",
-      "tracking_number": null,
-      "tracking_url": "https://notices.rei.com/pub/cc?_ri_=X0Gzc2X%3DBQjkPkSUWQG2RzcqzeGAIzczfzc5ps9Oczf5UzaizctlsB1A13azcYpKogILzatRMWlkg9n8VXtpKX%3DSURCABYU&_ei_=EZ_YWiBkdBKG-5DufeVBmfJnhDEPjKXTWwTsY6-BTRT340Pl-wD8MRydoOmSDH1rFjqDrnB2wa42MXfe2B0Wt7Koj7nN-HPH4l0v1StGnnBK44hj-9eMU03hJ95uqLBWL3dTNeHEewhPVwmxq1K69D3-15-7G_r1XJj39bAMv2EmGWT1aDxeSqkqQjCqig--7MJ82AXseQjWQTI0Gg_Et7nULw8D2FvgR9Lv2gd8m7WqlBH1NBdpL02V5JhUbyWst7DESSGIERGZzC0FKpm26M7AidQIfmqzHdtg9oH_1wYHca-J1s5qUdRaII3DkWUnuFBxj1JhQBqYh34MDlFikzkt0ST-w0.&_di_=1gujdukt0l61edag9h097vj4fe4dap8i2s3lsru3lr9j4p5vlsv0",
-      "status": "ordered",
-      "status_detail": "We're preparing your item",
+      "carrier": "Better Trucks",
+      "tracking_number": "RE01770000000807878",
+      "tracking_url": "https://notices.rei.com/pub/cc?_ri_=X0Gzc2X%3DBQjkPkSUWQGvgYzc9fnS4oaM5YPWcdr3nHXpqoASWw8YDzd29PBzfbI2p2YzeSKPr8VXtpKX%3DSURRWAYC&_ei_=E-FBWJqUWaLLkAGD46ZqJrVll67t-2sttxv14MKWrZoCLDiKsl5PnFkYKHkyJ6wqL5iM4EXeLeHdJrRtlXBbN6KUs754bO6p0zBzCLlMUk-d-Xyc0J6BPaYSmo-4CCeYjpMdWTPkkDLWikbP330j-rX-wx7j8VdglJ3TJOyBJfQzyerowVY8bH4q7c4DMnzWebgPvclmaQlKqSPXqZbfQJP4wcTgE1tMsSB-cILXSRfI0sxtHDkwO-E02kZG7Z5ZKN97j0oaO6kWEJ4Gi-pWudSQXYeqzGgl0ck5f4i-dTRI9RkYtRwwuRDyu1FBhsb_nKeAZIDkrPPlzTEzOxLahw0mPLb-ZuhH2AEakQICcX3tRLMRIrlLZeNqG5gzaCn6CLuoHVFNYiRSxEhQU-auNl7aHzUuRFbuMN-eTqF-Qx3HOuZtnEvYgRuBsWs83bvlA6BSCz-7NkF2bCfz0ZmwSAHbLRAbZ21-0oaSM-b7KAwxqvlfN-vrMiS7PN0xEtcP0-oXFClEmJqYuKAiftydupGlEhHLRoGBXYCvfY8WxtuwMeueJR1CloiMbM.&_di_=2k9hb41raun4ipkt4k9voaa81jhjq05qa6sk2g5u264jrce2mmeg",
+      "status": "shipped",
+      "status_detail": "Order has shipped",
       "estimated_delivery": "2026-06-05",
       "delivered_at": null,
       "order_number": "A400955099",
-      "item_cost": 79.99,
-      "order_total": 79.99,
+      "item_cost": null,
+      "order_total": null,
       "currency": "USD",
-      "received_at": "2026-05-31T21:58:15+00:00",
-      "last_updated": "2026-06-01"
+      "received_at": "2026-06-02T00:13:25+00:00",
+      "last_updated": "2026-06-02"
     },
     {
       "email_id": "54bf2a99f0aac7bd56c0b3ef78361d5a",
@@ -523,5 +541,5 @@
       "last_updated": "2026-05-13"
     }
   ],
-  "last_updated": "2026-06-01T19:17:54.900363+00:00"
+  "last_updated": "2026-06-02T04:01:48.543120+00:00"
 }
