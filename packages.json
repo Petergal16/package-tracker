@@ -181,6 +181,24 @@
       "last_updated": "2026-05-26"
     },
     {
+      "email_id": "907d94c13cbd86b9411b130d3364e35e",
+      "retailer": "REI Co-op",
+      "description": "America the Beautiful Pass - Resident - 2026",
+      "carrier": "Better Trucks",
+      "tracking_number": "RE01770000000807878",
+      "tracking_url": "https://notices.rei.com/pub/cc?_ri_=X0Gzc2X%3DBQjkPkSUWQG2zczazbIknHzb7MynsmqXfaNsFg5ncT2bn5yzdrLzeNkByGUY8IoMYpOmVXtpKX%3DSURYTCWR&_ei_=E-FBWJqUWaLLkAGD46ZqJrU3hFIJ_nkwx2k9UxA6zgoOQkfoOci0SWHAFmwUS4gW8iMno4kyLfwPwTGJV4BTqcBqFjGENke9XBsPwXc6OcmG3clvt3eGVPRKaBhbcc7dbbxfEMzcTpFHWDSkH1Sv2P8vGIBrcOOuycK_btERZ5Y7Mz0DFIoUHsqWVZ_Q_huxDOAw3RZwzGqj6K70rFAbOJLjpQ7axKkuGXnkFlrBmLJybsmATbt6s0eEgAaNSo74RpsnhZckVkk9HwPk-zPdVPKLMV2DdaVXVc3luxH8iHrrc62WGqRi_LE4iDD0CkVpxhiLh1UC2bWnTnhC_OPup6r8_MsFHO4t2u7jhIM3CKgluy_tq-hqo3GY4h3lvqHrB-G6eID70_FuF_ULinfUXTY2FaMPVWMzfJcxjxc8Shgga77HRXsFuxlRoffj94V9bQwu0ncyNN-nT6vxFTHMLAIuaNhDW0DbJXhRtwXZAm2DQqzN_x6nua8yTfIpQj7IVOSWTpzyrw-I1TUfCAVORMbb1mjmbDb3tnrTGAqJM1U0MmQrR-1U.&_di_=tmmnbrsigf3a7b8vvaog3cb6d9ddhn628kas9t410imvbd1qv650",
+      "status": "out_for_delivery",
+      "status_detail": "Out for delivery",
+      "estimated_delivery": "2026-06-03",
+      "delivered_at": null,
+      "order_number": "A400955099",
+      "item_cost": null,
+      "order_total": null,
+      "currency": null,
+      "received_at": "2026-06-03T17:36:44+00:00",
+      "last_updated": "2026-06-03"
+    },
+    {
       "email_id": "edfc17ee41edb136ae1a8e2fa24447b8",
       "retailer": "HeatShield Store",
       "description": "HeatShield order",
@@ -194,26 +212,8 @@
       "order_number": "153767",
       "item_cost": null,
       "order_total": null,
-      "currency": "USD",
+      "currency": null,
       "received_at": "2026-06-01T17:39:40-07:00",
-      "last_updated": "2026-06-03"
-    },
-    {
-      "email_id": "d429462d37dbb6eda3cdd1025c8cd479",
-      "retailer": "REI Co-op",
-      "description": "America the Beautiful Pass - Resident - 2026",
-      "carrier": "Better Trucks",
-      "tracking_number": "RE01770000000807878",
-      "tracking_url": "https://notices.rei.com/pub/cc?_ri_=X0Gzc2X%3DBQjkPkSUWQGvgYzc9fnS4oaM5YPWcdr3nHXpqoASWw8YDzd29PBzfbI2p2YzeSKPr8VXtpKX%3DSURRWAYC&_ei_=E-FBWJqUWaLLkAGD46ZqJrVll67t-2sttxv14MKWrZoCLDiKsl5PnFkYKHkyJ6wqL5iM4EXeLeHdJrRtlXBbN6KUs754bO6p0zBzCLlMUk-d-Xyc0J6BPaYSmo-4CCeYjpMdWTPkkDLWikbP330j-rX-wx7j8VdglJ3TJOyBJfQzyerowVY8bH4q7c4DMnzWebgPvclmaQlKqSPXqZbfQJP4wcTgE1tMsSB-cILXSRfI0sxtHDkwO-E02kZG7Z5ZKN97j0oaO6kWEJ4Gi-pWudSQXYeqzGgl0ck5f4i-dTRI9RkYtRwwuRDyu1FBhsb_nKeAZIDkrPPlzTEzOxLahw0mPLb-ZuhH2AEakQICcX3tRLMRIrlLZeNqG5gzaCn6CLuoHVFNYiRSxEhQU-auNl7aHzUuRFbuMN-eTqF-Qx3HOuZtnEvYgRuBsWs83bvlA6BSCz-7NkF2bCfz0ZmwSAHbLRAbZ21-0oaSM-b7KAwxqvlfN-vrMiS7PN0xEtcP0-oXFClEmJqYuKAiftydupGlEhHLRoGBXYCvfY8WxtuwMeueJR1CloiMbM.&_di_=2k9hb41raun4ipkt4k9voaa81jhjq05qa6sk2g5u264jrce2mmeg",
-      "status": "shipped",
-      "status_detail": "Just shipped",
-      "estimated_delivery": "2026-06-05",
-      "delivered_at": null,
-      "order_number": "A400955099",
-      "item_cost": null,
-      "order_total": null,
-      "currency": "USD",
-      "received_at": "2026-06-02T00:13:25+00:00",
       "last_updated": "2026-06-03"
     },
     {
@@ -500,7 +500,7 @@
       "order_number": null,
       "item_cost": null,
       "order_total": null,
-      "currency": "USD",
+      "currency": null,
       "received_at": "2026-06-02T22:49:05+00:00",
       "last_updated": "2026-06-03"
     },
@@ -559,5 +559,5 @@
       "last_updated": "2026-05-13"
     }
   ],
-  "last_updated": "2026-06-03T04:10:42.485951+00:00"
+  "last_updated": "2026-06-03T18:20:21.850562+00:00"
 }
