@@ -200,7 +200,7 @@
     },
     {
       "email_id": "edfc17ee41edb136ae1a8e2fa24447b8",
-      "retailer": "HeatShield",
+      "retailer": "HeatShield Store",
       "description": "HeatShield order",
       "carrier": "UPS",
       "tracking_number": "1Z8939570393090327",
@@ -214,7 +214,7 @@
       "order_total": null,
       "currency": "USD",
       "received_at": "2026-06-01T17:39:40-07:00",
-      "last_updated": "2026-06-11"
+      "last_updated": "2026-06-12"
     },
     {
       "email_id": "54bf2a99f0aac7bd56c0b3ef78361d5a",
@@ -502,7 +502,7 @@
       "order_total": null,
       "currency": "USD",
       "received_at": "2026-06-02T22:49:05+00:00",
-      "last_updated": "2026-06-11"
+      "last_updated": "2026-06-12"
     },
     {
       "email_id": "1d824444a7f2f3ed989b2af6603dc3af",
@@ -559,5 +559,5 @@
       "last_updated": "2026-05-13"
     }
   ],
-  "last_updated": "2026-06-11T17:35:10.911740+00:00"
+  "last_updated": "2026-06-12T04:01:46.039365+00:00"
 }
