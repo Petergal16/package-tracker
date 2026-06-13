@@ -206,7 +206,7 @@
       "tracking_number": "1Z8939570393090327",
       "tracking_url": "https://wwwapps.ups.com/WebTracking/processRequest?InquiryNumber1=1Z8939570393090327&track.x=0&track.y=0%22#",
       "status": "shipped",
-      "status_detail": "Package shipped",
+      "status_detail": "Your Order Has Shipped",
       "estimated_delivery": "2026-06-04",
       "delivered_at": null,
       "order_number": "153767",
@@ -494,7 +494,7 @@
       "tracking_number": "55563434841116820665",
       "tracking_url": "https://w-mt.co/g/rptrcks/comm-smart-app/services/tracking/clickTracker?redirectTo=Lyb5MRpcU6q9TxxW6%2FkWFEkE5rydHtdSRKPtigOhxgRoOGzQVN%2B9Nr7Ft%2BzYNSSYbHIYv2gBzwSFknKwR3bJ2nTIOevzJywMtimN85vT477AHyxLVTsfk3xp87WoGcK8FWub6qTWnv0FZPFLq%2B%2Ft9HUJBWmH2RHh4PfeHHFuOPrMfLHywmy3EzQV%2B1zuGofQ758b%2BbcOmHxkRketkpJYW%2FOJX%2Fr14pwnGR4Qrk%2FVAkp4JM5RzeN2M0Fsj4Cbmin%2B3XMs6h2aWeZVzKZ0xLkmPkZ63qpm1QgF%2F0rioGpNecGNIG6gPdj6xT6jdppIoN%2BHxp8E9fqGJO2g4ziImmn1yayTS7SV7xQ1%2BunxAGymKOJvZa9YqHhfoYTU8pKhHDwCTf%2FToJhUxRPDlJfkaaL9O%2BzhuqhHHhrmAtsOOry1U6Sb7Q%2BjvLLzmJaXw7qU13hh1rkwRl8Vb5Re2%2FMJuU3xPaMpsAPsDtfZZMX0mudTogWn30wADvOWQv3j%2BDSKvxOlsIBvGvhRnFDaA8v6NNxbb%2FGLMyz128N1m1Q8Q1JcJf2BvqWV68%2BxQBe5RyySkwkwvIp523%2BoXR7%2F5FmaIPJ71seOIxbgqZe05dvo5wjicTC75OOoCGiu%2BMpXpVr4vNxOD6xuK2ebmNlCAXV7BIEvV8PyDygsp7eh5RuJIBoMvhquQhOaPGkyUL%2FBWD0OndyUFPA1BCbvuwGqag6dTDx9JevTIAeONrZrb%2FDlJwnlf9Xq3cdy%2FI6UTbUtPgaitpMipX4Fs%2BZx9rZ%2Fx2NPgbFE3fnhds3VNg3wE3NAWBnz%2FjSooa5dbjDs8ClHh3xOJf7Cs0gPoph%2Bqn1GTSuOrhXvILbklvBplxnh1i168XetJ4M%3D&meta=kO1sxou0U1g9GjakZLwTVYr9xxXKx%2FODUwa%2FFYESBI2Zd22vx7EuCBvxz9TiafSEv39WHhPYqIksEHCmsg0Y5Gn8BzBouRXmdco0sXLPftWBF8IW6IZTiPkX3TVg6S%2F2apPgs3G8uIK0J1eGoFBsGHMz7fTgDLx3G7MtJZ8Cv9hnjQ2Dgx7pHch%2FOWKh%2Fdkx0%2FDN1oE%2BU%2BwjUoRxBYtSNw%3D%3D&iv=XtQI2NvolfiM5yeZHgL%2Fsw%3D%3D",
       "status": "shipped",
-      "status_detail": "Package shipped",
+      "status_detail": "Your package shipped",
       "estimated_delivery": null,
       "delivered_at": null,
       "order_number": null,
@@ -559,5 +559,5 @@
       "last_updated": "2026-05-13"
     }
   ],
-  "last_updated": "2026-06-13T03:49:03.106550+00:00"
+  "last_updated": "2026-06-13T15:41:10.381690+00:00"
 }
